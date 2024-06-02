@@ -1,10 +1,50 @@
+---
+
+import CardNext from "@components/CardNext.jsx";
+const response = await fetch("https://graphql.datocms.com/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Authorization: `Bearer ${import.meta.env.DATOCMS_API_KEY}`,
+  },
+  body: JSON.stringify({
+    query: `query {
+        allProyectos(orderBy: _createdAt_ASC) {
+          id
+          name
+          _status
+          thumbnail{
+            url
+          }
+        }
+      }`,
+  }),
+});
+
+const json = await response.json();
+const data = json.data.allProyectos;
+
+console.log(data);
+---
+
 <section class="py-20">
-    <div class="container mx-auto max-w-screen-lg px-6 relative z-10">
-      <h2
-        class="text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500 my-10"
-      >
-        Proyectos
-      </h2>
+  <div class="container mx-auto max-w-screen-lg px-6 relative z-10">
+    <h2
+      class="text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500 my-10"
+    >
+      Proyectos
+    </h2>
+
+    <div class="grid grid-cols-2 gap-10">
+      {
+        data.map((item: any) => {
+          
+          return (
+            <CardNext  title={item.name} image={item.thumbnail.url} />
+          )
+        })
+      }
     </div>
-  </section>
-  
+  </div>
+</section>
