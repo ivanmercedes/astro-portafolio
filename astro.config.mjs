@@ -2,6 +2,8 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 
+import netlify from "@astrojs/netlify";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react()],
@@ -14,7 +16,7 @@ export default defineConfig({
       // See note below for using dual light/dark themes
       themes: {
         light: 'github-light',
-        dark: 'github-dark',
+        dark: 'github-dark'
       },
       // Add custom languages
       // Note: Shiki has countless langs built-in, including .astro!
@@ -24,7 +26,9 @@ export default defineConfig({
       wrap: true,
       // Add custom transformers: https://shiki.style/guide/transformers
       // Find common transformers: https://shiki.style/packages/transformers
-      transformers: [],
-    },
+      transformers: []
+    }
   },
+  output: "server",
+  adapter: netlify()
 });
