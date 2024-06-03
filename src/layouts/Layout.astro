@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { ViewTransitions } from "astro:transitions";
 import gradientLeft from "../assets/images/docs-left.png";
 import gradientRight from "../assets/images/docs-right.png";
 import Navbar from "../components/Navbar.jsx";
@@ -19,6 +20,7 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body>
     <Navbar />
@@ -46,34 +48,76 @@ const { title } = Astro.props;
         data-loaded="true"
       />
     </div>
-  </body>
+  </body><style is:global>
+    :root {
+      --accent: 136, 58, 234;
+      --accent-light: 224, 204, 250;
+      --accent-dark: 49, 10, 101;
+      --accent-gradient: linear-gradient(
+        45deg,
+        rgb(var(--accent)),
+        rgb(var(--accent-light)) 30%,
+        white 60%
+      );
+    }
+    html {
+      font-family: system-ui, sans-serif;
+      background: #13151a;
+      background-size: 224px;
+    }
+    code {
+      font-family:
+        Menlo,
+        Monaco,
+        Lucida Console,
+        Liberation Mono,
+        DejaVu Sans Mono,
+        Bitstream Vera Sans Mono,
+        Courier New,
+        monospace;
+    }
+    pre > code,
+    p > code {
+      display: grid;
+      background-color: rgba(200, 200, 255, 0.09);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+    }
+
+    .blog-content p {
+      margin: 0.5rem 0;
+      font-family: Helvetica, sans-serif;
+    }
+
+    .blog-content h2 {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      font-weight: 600;
+    }
+
+    .blog-content h3 {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+      font-weight: 600;
+    }
+
+    ul,
+    menu {
+      list-style: disc;
+      padding: revert;
+    }
+
+    ol {
+      list-style: decimal;
+      padding: revert;
+    }
+
+    .blog-content a {
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+
+  </style>
 </html>
-<style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
-  }
-  html {
-    font-family: system-ui, sans-serif;
-    background: #13151a;
-    background-size: 224px;
-  }
-  code {
-    font-family:
-      Menlo,
-      Monaco,
-      Lucida Console,
-      Liberation Mono,
-      DejaVu Sans Mono,
-      Bitstream Vera Sans Mono,
-      Courier New,
-      monospace;
-  }
-</style>
