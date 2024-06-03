@@ -1,0 +1,25 @@
+---
+import { Image } from "astro:assets";
+import ImageNext from "./Image";
+
+const { data } = Astro.props;
+---
+
+<div
+  class="flex flex-col relative overflow-hidden h-auto text-foreground box-border bg-content1 outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 shadow-medium rounded-large transition-transform-background motion-reduce:transition-none py-2"
+>
+  <div
+    class="relative flex w-full p-3 flex-auto flex-col place-content-inherit align-items-inherit h-auto break-words text-left subpixel-antialiased overflow-visible py-2"
+  >
+    <a
+      href={`blog/${data.postSlug}`}
+      transition:name={`media-image-${data.postSlug}`}
+    >
+      <ImageNext image={data.thumbnail.url} title={data.title} />
+    </a>
+
+    <div class="pb-0 pt-2 px-4 flex-col items-start">
+      <h3 class="font-bold text-large">{data.title}</h3>
+    </div>
+  </div>
+</div>
