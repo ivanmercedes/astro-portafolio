@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import ImageNext from "./Image";
 
 const { data } = Astro.props;
@@ -12,7 +11,7 @@ const { data } = Astro.props;
     class="relative flex w-full p-3 flex-auto flex-col place-content-inherit align-items-inherit h-auto break-words text-left subpixel-antialiased overflow-visible py-2"
   >
     <a
-      href={`blog/${data.postSlug}`}
+      href={`/blog/${data.postSlug}`}
       transition:name={`media-image-${data.postSlug}`}
     >
       <ImageNext image={data.thumbnail.url} title={data.title} />
