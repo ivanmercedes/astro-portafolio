@@ -76,15 +76,24 @@ const { title } = Astro.props;
           Courier New,
           monospace;
       }
-      pre > code,
-      p > code {
-        display: grid;
-        background-color: rgba(200, 200, 255, 0.09);
-        padding: 1rem;
+      pre {
         margin: 1rem 0;
-        border-radius: 10px;
-        overflow: hidden;
-        overflow-x: scroll;
+      }
+      pre > code,
+      code {
+        padding: 1rem;
+        width: 100%;
+        display: block;
+        margin: 0;
+      }
+
+      .copy-code {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #000409;
+        padding: 0.3em;
+        border: 1px solid #202020;
       }
 
       .blog-content p {

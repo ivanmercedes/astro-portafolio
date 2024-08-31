@@ -2,6 +2,7 @@
 import ImageNext from "./Image";
 
 const { data } = Astro.props;
+console.log(data);
 ---
 
 <div
@@ -10,15 +11,15 @@ const { data } = Astro.props;
   <div
     class="relative flex w-full p-3 flex-auto flex-col place-content-inherit align-items-inherit h-auto break-words text-left subpixel-antialiased overflow-visible py-2"
   >
-    <a
-      href={`/blog/${data.postSlug}`}
-      transition:name={`media-image-${data.postSlug}`}
-    >
-      <ImageNext image={data.thumbnail.url} title={data.title} />
+    <a href={`/blog/${data.slug}`} transition:name={`media-image-${data.slug}`}>
+      <ImageNext
+        image={data?.thumbnail?.url ? data.thumbnail.url : data.image.url}
+        title={data.title}
+      />
     </a>
 
     <div class="pb-0 pt-2 px-4 flex-col items-start">
-      <h3 class="font-bold xl:text-large">{data.title}</h3>
+      <h3 class="font-bold xl:text-large">{data.postTitle}</h3>
     </div>
   </div>
 </div>

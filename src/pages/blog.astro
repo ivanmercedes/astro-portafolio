@@ -1,31 +1,22 @@
 ---
+import { getCollection } from "astro:content";
+
 import BlogsWidget from "@components/sections/BlogsWidget.astro";
 import Layout from "@layouts/Layout.astro";
 
-const response = await fetch("https://graphql.datocms.com/", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-    Authorization: `Bearer ${import.meta.env.DATOCMS_API_KEY}`,
-  },
-  body: JSON.stringify({
-    query: `
-      query {
-   allBlogs (orderBy: createdAt_DESC){
-    title
-    postSlug
-    thumbnail {
-      url
-    }
-  }
-}`,
-  }),
-});
-
-const json = await response.json();
-const data = json.data.allBlogs;
-
+const posts = (await getCollection("posts"))
+  .sort(
+    (
+      { data: { datePublished: datePublishedA } },
+      { data: { datePublished: datePublishedB } }
+    ) => new Date(datePublishedB).valueOf() - new Date(datePublishedA).valueOf()
+  )
+  .map(({ data: { datePublished, postTitle, image }, slug }) => ({
+    datePublished,
+    postTitle,
+    image,
+    slug,
+  }));
 ---
 
 <Layout title="Blog">
@@ -38,11 +29,11 @@ const data = json.data.allBlogs;
           Blog
         </h1>
         <p>
-          Un pequeño espacio donde comparto conocimientos, consejos y novedades sobre programación.
+          Un pequeño espacio donde comparto conocimientos, consejos y novedades
+          sobre programación.
         </p>
       </header>
-
-      <BlogsWidget data={data} />
+      <BlogsWidget data={posts} />
     </div>
   </main>
 </Layout>

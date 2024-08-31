@@ -1,80 +1,94 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import type { Props } from "astro";
+import { getCollection } from "astro:content";
 
 const { slug } = Astro.params;
 
-const graphqlRequest = {
-  query: ` query {
-    allBlogs(orderBy: createdAt_DESC, filter: {postSlug: {eq: "${slug}"}}) {
-      title
-    postSlug
-    content(
-      markdown: true
-    )
-    thumbnail {
-      url
-    }
-  }
-}`,
-};
-
-const response = await fetch("https://graphql.datocms.com/", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-    Authorization: `Bearer ${import.meta.env.DATOCMS_API_KEY}`,
-  },
-  body: JSON.stringify(graphqlRequest),
-});
-
-const json = await response.json();
-const data = json.data.allBlogs[0];
-
 export async function getStaticPaths() {
-  const slugsResponse = await fetch("https://graphql.datocms.com/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: `Bearer ${import.meta.env.DATOCMS_API_KEY}`,
-    },
-    body: JSON.stringify({
-      query: `{
-        allBlogs{
-          postSlug
-        }
-      }`,
-    }),
+  const posts = await getCollection("posts");
+  return posts.map(({ data: { postTitle, image }, render, slug }: any) => {
+    return {
+      params: { slug },
+      props: {
+        render,
+        postTitle,
+        image,
+      },
+    };
   });
-  const parsedSlugResponse = await slugsResponse.json();
-
-  const pathsArray = [];
-  for (const slug of parsedSlugResponse.data.allBlogs) {
-    pathsArray.push({ params: { slug: slug.postSlug } });
-  }
-  return pathsArray;
 }
+
+const { render, postTitle: title, image }: Props & { image: { url: string } } = Astro.props as Props & { image: { url: string } };
+
+const { Content } = await (render as any)();
+const seoProps = {
+  slug,
+  title,
+  image,
+};
 ---
+
+<script>
+  let copyButtonLabel = "Copiar";
+  let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+  for (let codeBlock of codeBlocks) {
+    let wrapper = document.createElement("div");
+    wrapper.style.position = "relative";
+
+    let copyButton = document.createElement("button");
+    copyButton.className = "copy-code";
+    copyButton.innerHTML = copyButtonLabel;
+
+    codeBlock.setAttribute("tabindex", "0");
+    codeBlock.appendChild(copyButton);
+
+    if (codeBlock.parentNode) {
+      codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+    }
+    wrapper.appendChild(codeBlock);
+
+    copyButton.addEventListener("click", async () => {
+      await copyCode(codeBlock, copyButton);
+    });
+  }
+
+  async function copyCode(block: HTMLPreElement, button: HTMLButtonElement) {
+    let code = block.querySelector("code");
+    let text = code?.innerText ?? "";
+
+    await navigator.clipboard.writeText(text);
+
+    // visual feedback that task is completed
+    button.innerText = "Copiado!!!";
+
+    setTimeout(() => {
+      button.innerText = copyButtonLabel;
+    }, 700);
+  }
+</script>
 
 <Layout title="Blog">
   <div class="relative py-20 z-10">
     <div class="container mx-auto max-w-screen-lg px-6">
-      <article class="bg-background/30 border border-gray-600 p-3 lg:p-10 shadow-lg rounded-xl">
+      <article
+        class="bg-background/30 border border-gray-600 p-3 lg:p-10 shadow-lg rounded-xl"
+      >
         <header>
-          <h1
-            class="text-xl xl:text-4xl font-bold my-3"
-          >
-            {data.title}
+          <h1 class="text-xl xl:text-4xl font-bold my-3">
+            {title}
           </h1>
           <img
-            src={data.thumbnail.url}
+            src={image?.url}
             alt="thumbnail"
             class="w-full object-cover rounded-lg my-5"
             transition:name=`media-image-${slug.replace("blog/", "")}`
           />
         </header>
-        <div class="blog-content" set:html={data.content} />
+        <div class="blog-content">
+          <Content />
+        </div>
       </article>
     </div>
   </div>
