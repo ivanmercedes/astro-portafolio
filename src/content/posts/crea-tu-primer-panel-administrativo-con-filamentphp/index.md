@@ -61,7 +61,7 @@ Seguimos los pasos que nos piden
 
 Ya con esto listo podremos entrar a la siguiente URL:
 
-```
+```bash
 http://localhost:8000/admin/login
 ```
 
@@ -84,7 +84,11 @@ php artisan make:model Post -m
 ```
 
 
-Estos comandos nos crean los modelos y migraciones que vamos a editar, ahora abrimos la migración de **category** que está ubicada en ```database/migrations/xxxx_xx_xx_xxxxxx_create_categories_table.php```
+Estos comandos nos crean los modelos y migraciones que vamos a editar, ahora abrimos la migración de **category** que está ubicada en 
+
+```bash
+database/migrations/xxxx_xx_xx_xxxxxx_create_categories_table.php
+```
 
 y pegamos este código:
 
@@ -120,7 +124,11 @@ return new class extends Migration
 };
 ```
 
-Luego continuamos con la migración de posts ```database/migrations/xxxx_xx_xx_xxxxxx_create_posts_table.php```
+Luego continuamos con la migración de posts 
+
+```bash
+database/migrations/xxxx_xx_xx_xxxxxx_create_posts_table.php
+```
 
 agregando este código a la migración
 
