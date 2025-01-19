@@ -19,18 +19,21 @@ const posts = (await getCollection("posts"))
   }));
 ---
 
-<Layout title="Blog">
+<Layout 
+   title="Blog de Programación | Conocimientos, Tutoriales, Consejos y Novedades" 
+   description="Explora ideas innovadoras, tutoriales, consejos prácticos y lo último en tecnología y desarrollo web. Aprende programación de manera sencilla y efectiva." 
+   image="">
   <main class="py-20 relative z-10">
     <div class="container mx-auto max-w-screen-lg px-6">
       <header>
         <h1
-          class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500 my-3"
+          class="text-4xl font-bold bg-clip-text text-transparent  text-white my-3"
         >
-          Blog
+        Bienvenido a Mi Blog de Programación 
         </h1>
         <p>
-          Un pequeño espacio donde comparto conocimientos, consejos y novedades
-          sobre programación.
+          Descubre <strong class="text-primary-500">ideas innovadoras</strong>, <strong class="text-primary-500">consejos prácticos</strong>, <strong class="text-primary-500">tutoriales</strong> y lo último en <em>tecnología y desarrollo web</em>.
+          <br> ¡Explora y aprende conmigo! 📚
         </p>
       </header>
       <BlogsWidget data={posts} />
