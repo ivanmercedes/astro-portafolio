@@ -281,7 +281,6 @@ class ProfileResource extends Resource
 
 Aunque funcional, este enfoque puede dificultar el mantenimiento a medida que siga creciendo. ¿Qué pasó si necesitás modificar un campo o agregar uno nuevo? Ahí es donde entra la separación de lógica.
 
----
 
 ## 2. Solución: Dividir en Archivos Reutilizables
 
