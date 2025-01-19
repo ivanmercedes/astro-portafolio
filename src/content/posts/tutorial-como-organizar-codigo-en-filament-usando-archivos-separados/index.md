@@ -281,7 +281,6 @@ class ProfileResource extends Resource
 
 Aunque funcional, este enfoque puede dificultar el mantenimiento a medida que siga creciendo. ¿Qué pasó si necesitás modificar un campo o agregar uno nuevo? Ahí es donde entra la separación de lógica.
 
-
 ## 2. Solución: Dividir en Archivos Reutilizables
 
 ### Crear Archivos de Configuración de Tabs
@@ -311,7 +310,7 @@ use Filament\Forms\Components\Tabs;
 
 class DocumentsTab
 {
-    public static function get($userType): Tabs\Tab
+    public static function make($userType): Tabs\Tab
     {
         return Tabs\Tab::make('Documentos')
             ->icon('heroicon-o-briefcase')
@@ -361,13 +360,132 @@ class ProfileResource extends Resource
         return $form->schema([
             Tabs::make('Tabs')
                 ->tabs([
-                    DocumentsTab::get($userType),
+                    DocumentsTab::make($userType),
                     // Otras tabs...
                 ]),
         ]);
     }
 }
 ```
+
+ya una vez que tengamos todos los archivos separados, nuestro recurso principal se verá mucho más limpio y organizado.
+
+el cual se verá de la siguiente manera:
+
+```php
+<?php
+
+namespace App\Filament\Resources;
+
+use App\Filament\Components\Tabs\AcademicInformationTab;
+use App\Models\User;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Tabs;
+use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Components\Tabs\DocumentsTab;
+use App\Filament\Components\Tabs\LanguagesTab;
+use App\Filament\Resources\ProfileResource\Pages;
+use App\Filament\Components\Tabs\EmploymentDataTab;
+use App\Filament\Components\Tabs\PersonalInformationTab;
+
+class ProfileResource extends Resource
+{
+    protected static ?string $model = User::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    protected static ?string $label = "Perfiles";
+
+    public static function form(Form $form): Form
+    {
+        $userType = $form->getRecord()->user_type;
+
+        return $form
+            ->schema([
+                Tabs::make('Tabs')
+                    ->tabs([
+                        PersonalInformationTab::make($userType),
+                        AcademicInformationTab::make($userType),
+                        EmploymentDataTab::make($userType),
+                        LanguagesTab::make($userType),
+                        DocumentsTab::make($userType)
+                    ])->columns(1),
+            ])->columns(1);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Correo')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('user_type')
+                    ->label('Tipo de Usuario')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ])
+            ->query(User::query()->whereHas('roles', function (Builder $query) {
+                $query->where('name', 'user');
+            }));
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListProfiles::route('/'),
+            'create' => Pages\CreateProfile::route('/create'),
+            'edit' => Pages\EditProfile::route('/{record}/edit'),
+        ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function getTableQuery(): Builder
+    {
+
+        return parent::getEloquentQuery()
+            ->whereHas('roles', function (Builder $query) {
+                $query->where('name', 'user');
+            });
+    }
+}
+```
+muchos más limpio y organizado, ¿verdad? 😎
 
 ## 3. Ventajas de Este Enfoque
 
