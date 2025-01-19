@@ -1,12 +1,15 @@
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
+
+import robotsTxt from "astro-robots-txt";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://ivanmercedes.com",
   base: "/",
-  integrations: [tailwind(), react()],
+  integrations: [tailwind(), react(), sitemap(), robotsTxt()],
   markdown: {
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
