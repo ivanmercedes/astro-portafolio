@@ -1,0 +1,47 @@
+---
+import Layout from "@layouts/Layout.astro";
+// import Skills from "@components/sections/Skills.astro"; 
+---
+
+<Layout 
+  title="Ivan Mercedes - Fullstack Developer Santo Domingo" 
+  description="Desarrollador Fullstack en Santo Domingo experto en Laravel, React, React Native, Node.js y Wordpress."
+  image="ivanmercedes-avatar.webp"
+>
+    <main class="py-20 relative z-10">
+        <div class="container mx-auto max-w-screen-lg px-6">
+          <header>
+            <h1
+              class="text-4xl font-bold bg-clip-text text-transparent  text-white my-3"
+            >
+            Xpendora - Privacy Policy
+            </h1>
+           
+          </header>
+
+          <div>
+            <h2 class="mb-5 font-semibold">1. General Information</h2>
+            <p class="mb-5">Xpendora ("the app") is an expense tracker designed to manage personal expenses and income. This policy explains how we handle your information.</p>
+            <h2 class="mb-5 font-semibold">2. Data We Collect</h2>
+            <h3>a) Authentication Data (Clerk)</h3>
+            <p class="mb-5">To log in, we use Clerk as an identity provider. We collect your name, email address, and profile picture (as allowed by the social login provider: Google, Apple, etc.).</p>
+            <p class="mb-5">We do not store passwords; Clerk securely manages authentication.</p>
+            <h3>b) Financial Data (local)</h3>
+            <p class="mb-5">The app stores transactions (expenses/income), categories, and budgets only in SQLite on your device.</p>
+            <p class="mb-5">No financial data is sent to external servers or accessible by us.</p>
+            <h2 class="mb-5 font-semibold">3. How We Use Your Data</h2>
+            <p class="mb-5">Authentication data (email, name) is only used to identify your account within the app. Financial data is processed locally to generate reports and statistics.</p>
+            <h2 class="mb-5 font-semibold">4. Storage and Security</h2>
+            <p class="mb-5">Your financial data never leaves your device (local SQLite). Clerk encrypts and protects your login data under its Privacy Policy.</p>
+            <p class="mb-5">We recommend securing your device with a password or biometrics to prevent unauthorized access.</p>
+            <h2 class="mb-5 font-semibold">5. Data Sharing with Third Parties</h2>
+            <p class="mb-5">We do not share financial data with anyone (neither advertising nor analytics). Clerk may use login data according to its policy but does not access your transactions.</p>
+            <h2 class="mb-5 font-semibold">6. Deleting Your Data</h2>
+            <p class="mb-5">To delete authentication data: Cancel your account from the Clerk settings section. To delete financial data: Uninstall the app (this will delete the local SQLite database).</p>
+            <h2 class="mb-5 font-semibold">7. Changes to This Policy</h2>
+            <p class="mb-5">We will notify you of significant updates within the app.</p>
+          </div>
+        </div>
+      </main>
+</Layout>
+
