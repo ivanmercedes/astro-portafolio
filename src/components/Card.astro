@@ -2,11 +2,10 @@
 import ImageNext from "./Image";
 
 const { data } = Astro.props;
-console.log(data);
 ---
 
 <div
-  class="flex flex-col relative overflow-hidden h-auto text-foreground box-border bg-content1 outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 shadow-medium rounded-large transition-transform-background motion-reduce:transition-none py-2"
+  class="flex flex-col relative overflow-hidden h-auto text-foreground box-border backdrop-saturate-150 bg-background/70 outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 shadow-medium rounded-large transition-transform-background motion-reduce:transition-none py-2 border border-divider"
 >
   <div
     class="relative flex w-full p-3 flex-auto flex-col place-content-inherit align-items-inherit h-auto break-words text-left subpixel-antialiased overflow-visible py-2"
