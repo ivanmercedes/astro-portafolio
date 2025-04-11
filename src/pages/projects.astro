@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+
+import Card from "@components/Card.astro";
+import Layout from "@layouts/Layout.astro";
+
+const posts = (await getCollection("projects"))
+  .sort((a, b) => b.data.id - a.data.id)
+  .map(({ data: { datePublished, name, image, tags }, slug }) => ({
+    datePublished,
+    name,
+    image,
+    slug,
+    tags,
+  }));
+---
+
+<Layout
+  title="Mis Proyectos | Ivan Mercedes"
+  description="Explora mi colección de proyectos de desarrollo web, aplicaciones y diseños. Cada proyecto representa soluciones creativas y técnicas innovadoras."
+  image="/blog-avatar.webp"
+>
+  <main class="py-20 relative z-10">
+    <div class="container mx-auto max-w-screen-lg px-6">
+      <header>
+        <h1
+          class="text-4xl font-bold bg-clip-text text-transparent text-white my-3"
+        >
+        Mis Proyectos Destacados
+        </h1>
+        <p>
+          Aquí encontrarás una selección de mis <strong class="text-primary-500">trabajos más recientes</strong>, donde aplico <strong class="text-primary-500">soluciones innovadoras</strong> y <strong class="text-primary-500">tecnologías modernas</strong>.
+          <br> ¡Conoce mi trabajo! 🚀
+        </p>
+      </header>
+      <section class="py-10">
+        <div class="grid xl:grid-cols-2 gap-10">
+          {
+            posts?.map((item: any) => {
+              return <Card data={item} isProject={true} />;
+            })
+          }
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
