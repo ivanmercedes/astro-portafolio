@@ -26,7 +26,7 @@ const { data, isProject } = Astro.props;
 
       <div class="flex flex-wrap gap-2 mt-2">
         {
-          data?.tags?.map((item: any) => (
+          data?.tags?.map((item: string[]) => (
             <span class="border border-divider font-bold px-3 text-sm rounded-full mt-0">
               {item}
             </span>
