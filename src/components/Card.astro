@@ -2,7 +2,6 @@
 import ImageNext from "./Image";
 
 const { data, isProject } = Astro.props;
-
 ---
 
 <div
@@ -11,8 +10,11 @@ const { data, isProject } = Astro.props;
   <div
     class="relative flex w-full p-3 flex-auto flex-col place-content-inherit align-items-inherit h-auto break-words text-left subpixel-antialiased overflow-visible py-2"
   >
-    <a href={`
-     ${isProject? '/project/': '/blog/'}${data.slug}`} transition:name={`media-image-${data.slug}`}>
+    <a
+      href={`
+     ${isProject ? "/project/" : "/blog/"}${data.slug}`}
+      transition:name={`media-image-${data.slug}`}
+    >
       <ImageNext
         image={data?.thumbnail?.url ? data.thumbnail.url : data.image.url}
         title={data.title}
@@ -21,6 +23,16 @@ const { data, isProject } = Astro.props;
 
     <div class="pb-0 pt-2 px-4 flex-col items-start">
       <h3 class="font-bold xl:text-large">{data.name}</h3>
+
+      <div class="flex flex-wrap gap-2 mt-2">
+        {
+          data?.tags?.map((item) => (
+            <span class="border border-divider font-bold px-3 text-sm rounded-full mt-0">
+              {item}
+            </span>
+          ))
+        }
+      </div>
     </div>
   </div>
 </div>
