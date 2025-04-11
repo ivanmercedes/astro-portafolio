@@ -1,0 +1,81 @@
+---
+import Layout from "@layouts/Layout.astro";
+import type { Props } from "astro";
+import { getCollection } from "astro:content";
+
+const { slug } = Astro.params as { slug: string };
+
+export async function getStaticPaths() {
+  const posts = await getCollection("projects");
+  return posts.map(({ data: { name, image, postDescription, tags, preview, github}, render, slug }: any) => {
+    return {
+      params: { slug },
+      props: {
+        render,
+        name,
+        postDescription,
+        image,
+        tags,
+        preview,
+        github
+      },
+    };
+  });
+}
+
+const { render, name: title, postDescription, image, tags,  preview,
+  github }: Props & { image: { url: string }, tags: string[], preview?: string, github?: string } = Astro.props as Props & { image: { url: string }, tags: string[], preview?: string, github?: string };
+
+const { Content } = await (render as any)();
+---
+
+<Layout title={title as string} description={postDescription as string} image={image.url}>
+  <div class="relative py-20 z-10">
+    <div class="container mx-auto max-w-screen-lg px-6">
+      <article
+        class="bg-background/30 border border-gray-600 p-3 lg:p-10 shadow-lg rounded-xl grid gap-5 lg:grid-cols-1"
+      >
+        <header>
+          <h1 class="text-xl xl:text-xl font-bold my-3">
+            {title}
+          </h1>
+          <img
+            src={image?.url}
+            alt="thumbnail"
+            class="w-full object-cover rounded-lg my-2"
+            transition:name=`media-image-${slug.replace("projects/", "")}`
+          />
+          <div class="flex flex-wrap gap-3 justify-center">
+            {
+              preview && (
+              <a class="bg-black border border-divider px-4 py-1 rounded-lg" href={preview} target="_blank" rel="noreferrer">
+              Preview
+             </a>
+              )
+            }
+            {
+              github && (
+              <a class="bg-black border border-divider px-4 py-1 rounded-lg" href={github} target="_blank" rel="noreferrer">
+              Code
+             </a>
+              )
+            }
+            </div>
+        </header>
+        <div class="blog-content">
+          <Content />
+         <div class="stack">
+          <h2 class="!text-lg !mb-1">Tenoclogia</h2>
+          <div class="flex flex-wrap gap-3">
+           {tags.map((item) => (
+             <span class="border border-divider font-bold px-3 text-sm rounded-full mt-0">
+               {item}
+             </span>
+           ))}
+          </div>
+         </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</Layout>

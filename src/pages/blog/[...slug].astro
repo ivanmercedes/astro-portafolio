@@ -7,12 +7,12 @@ const { slug } = Astro.params;
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
-  return posts.map(({ data: { postTitle, image, postDescription }, render, slug }: any) => {
+  return posts.map(({ data: { name, image, postDescription }, render, slug }: any) => {
     return {
       params: { slug },
       props: {
         render,
-        postTitle,
+        name,
         postDescription,
         image,
       },
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
   });
 }
 
-const { render, postTitle: title, postDescription, image }: Props & { image: { url: string } } = Astro.props as Props & { image: { url: string } };
+const { render, name: title, postDescription, image }: Props & { image: { url: string } } = Astro.props as Props & { image: { url: string } };
 
 const { Content } = await (render as any)();
 ---
