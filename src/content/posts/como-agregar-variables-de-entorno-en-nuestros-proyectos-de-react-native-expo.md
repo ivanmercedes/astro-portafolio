@@ -1,12 +1,11 @@
 ---
-
-postTitle: 'Como agregar Variables de Entorno en nuestros proyectos de React Native (Expo)'
-datePublished: '02/06/2022'
-postDescription: 'En este post, les mostraré cómo implementar variables de entorno en React Native cuando trabajamos con Expo. Aprenderemos a configurar un archivo .env y a utilizar el paquete react-native-dotenv.'
+name: "Como agregar Variables de Entorno en nuestros proyectos de React Native (Expo)"
+datePublished: "02/06/2022"
+postDescription: "En este post, les mostraré cómo implementar variables de entorno en React Native cuando trabajamos con Expo. Aprenderemos a configurar un archivo .env y a utilizar el paquete react-native-dotenv."
 image:
-    url: 'https://www.datocms-assets.com/41779/1660827647-expo-react.png'
+  url: "https://www.datocms-assets.com/41779/1660827647-expo-react.png"
 tags: ["expo", "react native"]
---- 
+---
 
 Hola a todos, hoy quiero compartir y mostrarle como se implementan variables de entorno en react native cuando trabajamos con [Expo](https://expo.dev/), si bien sabemos que es un entorno muy útil que nos ayuda a crear y distribuir nuestras aplicaciones de React Native. Y que ademas a menudo puede eliminar la fricción de usar Xcode y Android studio, ya que nos permite probar nuestras aplicaciones directamente en nuestro teléfono iOS y Android. Pero no todo es color de rosa, algunas de sus desventajas es que ocultan muchas configuraciones y no hay tanta ayuda con el tema de manejo de errores como podemos encontrar en React Native.
 
@@ -23,15 +22,18 @@ Las variables de entorno pueden ser increíblemente útiles cuando desea almacen
 si bien Expo no emplea archivos .env de manera predeterminada. Para que estos archivos .env funcionen tendremos que instalar un plugin de terceros. Si desconfía de instalar cualquier paquete nuevo, puedes utilizar los [Release Channels](https://docs.expo.dev/distribution/release-channels/) integrados de expo.
 
 ## Requisitos previos
+
 1. Asegúrese de tener instalada la última versión de Node 16.14.2 LTS o superior.
 2. Asegúrate de haber inicializado correctamente la aplicación con la línea de comandos de la CLI de Expo
 
 ## Vamos a empezar 🚀
+
 Ahora que tenemos nuestra aplicación configurada, hacemos cd en ella para comenzar
 
 `cd mi-app-react-native`
 
 ## Crear nuestro archivo .env
+
 En el directorio raíz/nivel superior de la aplicación, crea un archivo **.env**. Este nuevo archivo debe estar al mismo nivel que el archivo **babel.config.js**. Ahora vamos a crear un par clave/valor. Para nuestros propósitos aquí hagamos una clave de prueba:
 
 `HOLA_MUNDO="Hola, Mundo :U"`
@@ -41,6 +43,7 @@ En el directorio raíz/nivel superior de la aplicación, crea un archivo **.env*
 Recuerde agregar este archivo **.env** en su archivo **.gitignore**. Si no lo haces, corres el riesgo de exponer información confidencial en Github.
 
 ## Instalar react-native-dotenv
+
 Este es un complemento de terceros que mencione anteriormente. Este plugin "nos permite inyectar nuestras variables de entorno en proyectos de React Native utilizando dotenv para múltiples entornos".
 
 Para instalarlo con npm usaremos el siguiente comando
@@ -77,9 +80,9 @@ module.exports = function (api) {
 
 Para obtener nuestra variable de entorno, tendremos que importarlo en cualquier archivo en el que queramos usarlas.
 
-Ejemplo: 
+Ejemplo:
 
-Usando `import { HOLA_MUNDO } from '@env';` extraemos  la variable declarada en el archivo **.env** haciendo desestructuración.
+Usando `import { HOLA_MUNDO } from '@env';` extraemos la variable declarada en el archivo **.env** haciendo desestructuración.
 
 En nuestro componente quedaría de la siguiente forma:
 
@@ -93,7 +96,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>{HOLA_MUNDO}</Text>
       <StatusBar style="auto" />
-    </View>,
+    </View>
   );
 }
 
@@ -107,10 +110,8 @@ const styles = StyleSheet.create({
 });
 ```
 
-
-y ya con esto podríamos ver nuestra variable de entorno en nuestra app 
+y ya con esto podríamos ver nuestra variable de entorno en nuestra app
 
 <img src="https://www.datocms-assets.com/41779/1648141726-app.jpeg" style="max-width:400px; width:100%; margin-bottom:1rem;" />
-
 
 Como acabamos de ver, las variables de entorno son una excelente manera de mantener nuestro código mantenible y administrar diferentes claves para diferentes entornos (es decir, producción o desarrollo). Ahora te toca, probar a ti probar, me despido y hasta un próximo post 👋

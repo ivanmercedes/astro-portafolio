@@ -1,31 +1,32 @@
 ---
-postTitle: 'Crea tu primer panel administrativo con FilamentPHP'
-datePublished: '06/03/2024'
-postDescription: 'En este post, aprenderás a crear tu primer panel administrativo con FilamentPHP, un paquete para Laravel que te permite crear paneles administrativos de una manera rápida y sencilla.'
+name: "Crea tu primer panel administrativo con FilamentPHP"
+datePublished: "06/03/2024"
+postDescription: "En este post, aprenderás a crear tu primer panel administrativo con FilamentPHP, un paquete para Laravel que te permite crear paneles administrativos de una manera rápida y sencilla."
 image:
-    url: 'https://www.datocms-assets.com/41779/1717433470-1_qmhn9eusdlveomqcae1sta.webp'
-tags: ["php", "laravel", "filamentphp", 'tutorial']
-
+  url: "https://www.datocms-assets.com/41779/1717433470-1_qmhn9eusdlveomqcae1sta.webp"
+tags: ["php", "laravel", "filamentphp", "tutorial"]
 ---
 
 ## ¿Qué es FilamentPHP?
+
 **FilamentPHP** es un paquete para **Laravel** que sirve para crear paneles administrativos de una manera rápida y sencilla, sin tener que tocar HTML o CSS, este usa el famoso stack conocido como **TALL Stack** el cual está compuesto por **TailwindCSS, AlpineJS, Laravel y Livewire** trae un conjunto de componentes interactivos prediseñados lo cuales son usados para crear nuestros paneles en tiempo récord.
 
 ### Requisitos
+
 FilamentPHP para funcionar necesita:
 
-* PHP 8.1+
-* Laravel v10.0+
-* Livewire v3.0+
-* Composer v2.0+
-
+- PHP 8.1+
+- Laravel v10.0+
+- Livewire v3.0+
+- Composer v2.0+
 
 ## Primeros pasos 🚀
+
 Para empezar necesitamos crear un proyecto en **Laravel**, el cual crearemos usando el siguiente comando:
 
 ```bash
-composer create-project laravel/laravel filament-blog  
-````
+composer create-project laravel/laravel filament-blog
+```
 
 Luego que este comando termine de ejecutarse vamos a conectar el proyecto a una base de datos, para ello vamos a nuestro archivo **.env** y lo editamos con nuestros credenciales de base de datos, una vez listo continuamos con el siguiente paso que sería ejecutar las migraciones
 
@@ -34,11 +35,12 @@ php artisan migrate
 ```
 
 ## Instalando FilamentPHP
+
 ya listo los pasos anteriores procedemos a instalar **FilamentPHP** para hacer esto tenemos que ejecutar el siguiente comando:
 
 ```bash
 composer require filament/filament:"^3.2" -W
- 
+
 php artisan filament:install --panels
 ```
 
@@ -52,7 +54,7 @@ En mi caso le dije que no, antes de continuar volvemos a abrir fichero **.env** 
 
 Lo siguiente que haremos es crear un usuario con **FilamentPHP** usando el comando:
 
-```bash 
+```bash
 php artisan make:filament-user
 ```
 
@@ -77,6 +79,7 @@ Ya dentro veremos este dashboard
 Que viene con lo básico como la funcionalidad para el light/dark mode y Logout, como podemos ver en nuestro sidebar no tenemos todavía ningún recurso, para ello en los siguientes pasos iremos creando nuestros recursos para que se vayan agregando en nuestro sidebar.
 
 ## Creando nuestro primer recurso
+
 Lo primero que tenemos que hacer es crear las migraciones y modelos, para ello tenemos que ejecutar dos comandos que serían los que les muestro a continuación:
 
 ```bash
@@ -84,8 +87,7 @@ php artisan make:model Category -m
 php artisan make:model Post -m
 ```
 
-
-Estos comandos nos crean los modelos y migraciones que vamos a editar, ahora abrimos la migración de **category** que está ubicada en 
+Estos comandos nos crean los modelos y migraciones que vamos a editar, ahora abrimos la migración de **category** que está ubicada en
 
 ```bash
 database/migrations/xxxx_xx_xx_xxxxxx_create_categories_table.php
@@ -125,7 +127,7 @@ return new class extends Migration
 };
 ```
 
-Luego continuamos con la migración de posts 
+Luego continuamos con la migración de posts
 
 ```bash
 database/migrations/xxxx_xx_xx_xxxxxx_create_posts_table.php
@@ -170,9 +172,10 @@ return new class extends Migration
     }
 };
 ```
+
 ¡Listo!!! Ahora vamos a continuar con las relaciones de nuestras migraciones en los modelos 🙌, pero antes vamos a correr nuestras nuevas migraciones con el comando:
 
-```bash 
+```bash
 php artisan migrate
 ```
 
@@ -209,7 +212,7 @@ class Category extends Model
 
 En la relación que estamos estableciendo, se especifica que una categoría contendrá varios posts mediante el uso del método **hasMany** (tiene muchos). En otras palabras, estamos haciendo una relación de uno a muchos.
 
-Ahora seguiremos con el modelo ***app/Models/Post.php*** donde también haremos varias relaciones
+Ahora seguiremos con el modelo **_app/Models/Post.php_** donde también haremos varias relaciones
 
 ```php
 
@@ -253,7 +256,7 @@ En este modelo hemos agregado dos relaciones, para ellos hemos usado el método 
 
 Antes de continuar podemos ver que en ambos modelos el atributo, protected _$guarded = [];_ esto lo que hace es ayudar a que podamos hacer acciones masivas, editar o añadir campos masivos con **FilamentPHP**
 
-Ahora para terminar con los modelos vamos a agregar un nuevo método en nuestro modelo de **User** ***app/Models/Post.php*** de esta manera
+Ahora para terminar con los modelos vamos a agregar un nuevo método en nuestro modelo de **User** **_app/Models/Post.php_** de esta manera
 
 ```php
 <?php
@@ -317,11 +320,12 @@ class User extends Authenticatable
 Lo que hicimos fue agregar el método **posts** usando otra vez el método de eloquent **hasMany** (tiene muchos) para indicar que un usuario tendrá muchos posts.
 
 ## La magia de FilamentPHP🪄
+
 Ahora se viene lo chido 😎 vamos a crear nuestro primer CRUD usando FilamentPHP y su magia al momento de crear recursos vamos a usar el comando:
 
 ```bash
 php artisan make:filament-resource --generate
-````
+```
 
 Al momento de ejecutarlo en nuestra consola nos saldrá como en la imagen de abajo donde vamos a escribir **Category** luego presionamos enter
 
@@ -335,11 +339,10 @@ Y si le damos clic tenemos las lo siguiente
 
 ![](https://www.datocms-assets.com/41779/1717437227-1_d9t1h3erhu6zbgb2ryxldg.webp)
 
-Tenemos una tabla que por el momento está vacía y vamos a **new category*
+Tenemos una tabla que por el momento está vacía y vamos a \*_new category_
 tenemos el formulario para insertar categorías
 
 ![](https://www.datocms-assets.com/41779/1717437269-1_ewrl80zkxrbdtk9gwmeixw.webp)
-
 
 Si insertamos una categoría y volvemos a nuestro listado podemos ver el registro.
 
@@ -354,7 +357,6 @@ php artisan make:filament-resource Post --generate
 Como pueden ver esta es otra manera de usar el comando agregando directamente el modelo del cual queremos generar el recurso y como paso anteriormente con **category** nos generó un CRUD para el recurso de post donde podemos seleccionar un usuario, una categoría, agregar un título, el cuerpo del post y subir una imagen.
 
 ![](https://www.datocms-assets.com/41779/1717437608-1_siwhw8sac0kmnddqpgpfmg.webp)
-
 
 Como podrán ver hemos creado dos **CRUD** en un tiempo récord con toda su funcionalidad, gracias a **FilamentePHP** que nos ayuda a crear estos paneles administrativos de una manera rápida, este post solo es una introducción básica, a lo que es este paquete más adelante seguiremos agregando cositas a este mismo proyecto el cual le dejaré el enlace de GitHub aquí debajo, dicho eso nos vemos en un próximo post 👨‍💻
 
