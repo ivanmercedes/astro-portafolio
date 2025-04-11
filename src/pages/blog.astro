@@ -11,9 +11,9 @@ const posts = (await getCollection("posts"))
       { data: { datePublished: datePublishedB } }
     ) => new Date(datePublishedB).valueOf() - new Date(datePublishedA).valueOf()
   )
-  .map(({ data: { datePublished, postTitle, image }, slug }) => ({
+  .map(({ data: { datePublished, name, image }, slug }) => ({
     datePublished,
-    postTitle,
+    name,
     image,
     slug,
   }));
