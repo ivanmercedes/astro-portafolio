@@ -3,7 +3,7 @@ name: "La manera más rápida y fácil de agregar Tailwindcss a un proyecto"
 datePublished: "10/13/2022"
 postDescription: "En este post, les mostraré la forma más rápida y sencilla de agregar Tailwindcss a tus proyectos. Con solo un comando, podras tener Tailwindcss configurado y listo para usar."
 image:
-  url: "https://www.datocms-assets.com/41779/1665637452-om-girl-feels-peace-patience-attractive-carefree-relaxed-happy-young-woman-curly-shirt-hairstyle-close-eyes-smiling-delighted-meditating-hands-sideways-nirvana-lotus-pose-breathing-practice-yoga_176420-34918.webp"
+  url: "/posts/la-manera-mas-rapida-y-facil-de-agregar-tailwindcss-a-un-proyecto.webp"
   alt: "The Astro logo on a dark background with a pink glow."
 tags: ["tailwind", "css", "cli tool"]
 ---

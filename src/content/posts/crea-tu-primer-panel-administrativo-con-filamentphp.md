@@ -3,7 +3,7 @@ name: "Crea tu primer panel administrativo con FilamentPHP"
 datePublished: "06/03/2024"
 postDescription: "En este post, aprenderás a crear tu primer panel administrativo con FilamentPHP, un paquete para Laravel que te permite crear paneles administrativos de una manera rápida y sencilla."
 image:
-  url: "https://www.datocms-assets.com/41779/1717433470-1_qmhn9eusdlveomqcae1sta.webp"
+  url: "/posts/crea-tu-primer-panel-administrativo-con-filamentphp.webp"
 tags: ["php", "laravel", "filamentphp", "tutorial"]
 ---
 
