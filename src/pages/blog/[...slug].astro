@@ -7,20 +7,29 @@ const { slug } = Astro.params;
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
-  return posts.map(({ data: { name, image, postDescription }, render, slug }: any) => {
-    return {
-      params: { slug },
-      props: {
-        render,
-        name,
-        postDescription,
-        image,
-      },
-    };
-  });
+  return posts.map(
+    ({ data: { name, image, postDescription }, render, slug }: any) => {
+      return {
+        params: { slug },
+        props: {
+          render,
+          name,
+          postDescription,
+          image,
+        },
+      };
+    }
+  );
 }
 
-const { render, name: title, postDescription, image }: Props & { image: { url: string } } = Astro.props as Props & { image: { url: string } };
+const {
+  render,
+  name: title,
+  postDescription,
+  image,
+}: Props & { image: { url: string } } = Astro.props as Props & {
+  image: { url: string };
+};
 
 const { Content } = await (render as any)();
 ---
@@ -65,11 +74,15 @@ const { Content } = await (render as any)();
   }
 </script>
 
-<Layout title={title as string} description={postDescription as string} image={image.url}>
+<Layout
+  title={title as string}
+  description={postDescription as string}
+  image={image.url}
+>
   <div class="relative py-20 z-10">
     <div class="container mx-auto max-w-screen-lg px-6">
       <article
-        class="bg-background/30 border border-gray-600 p-3 lg:p-10 shadow-lg rounded-xl"
+        class="bg-background/30 border border-divider p-3 lg:p-10 shadow-lg rounded-xl"
       >
         <header>
           <h1 class="text-xl xl:text-4xl font-bold my-3">
