@@ -21,29 +21,32 @@ const { title, description, image } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="google-site-verification" content="IDBcCYJLFvM4FI5FoBMBQuiLHA0Ce4uZ9-4roGaPSxM" />
+    <meta
+      name="google-site-verification"
+      content="IDBcCYJLFvM4FI5FoBMBQuiLHA0Ce4uZ9-4roGaPSxM"
+    />
     <SEO
-          title={title}
-          description={description}
-          openGraph={{
-            basic: {
-              title,
-              type: "website",
-              image,
-            }
-          }}
-          extend={{
-            link: [{ rel: "icon", href: "/favicon.ico" }],
-            meta: [
-              {
-                name: "twitter:image",
-                content: image,
-              },
-              { name: "twitter:title", content: title },
-              { name: "twitter:description", content: description },
-            ],
-          }}
-     />
+      title={title}
+      description={description}
+      openGraph={{
+        basic: {
+          title,
+          type: "website",
+          image,
+        },
+      }}
+      extend={{
+        link: [{ rel: "icon", href: "/favicon.ico" }],
+        meta: [
+          {
+            name: "twitter:image",
+            content: `https://ivanmercedes.com/${image}`,
+          },
+          { name: "twitter:title", content: title },
+          { name: "twitter:description", content: description },
+        ],
+      }}
+    />
     <ViewTransitions />
   </head>
   <body>
