@@ -78,6 +78,7 @@ const { Content } = await (render as any)();
   title={title as string}
   description={postDescription as string}
   image={image.url}
+  type="article"
 >
   <div class="relative py-20 z-10">
     <div class="container mx-auto max-w-screen-lg px-6">
@@ -88,12 +89,6 @@ const { Content } = await (render as any)();
           <h1 class="text-xl xl:text-4xl font-bold my-3">
             {title}
           </h1>
-          <!-- <img
-            src={image?.url}
-            alt="thumbnail"
-            class="w-full object-cover rounded-lg my-5"
-            transition:name=`media-image-${slug.replace("blog/", "")}`
-          /> -->
         </header>
         <div class="blog-content">
           <Content />
