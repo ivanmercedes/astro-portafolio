@@ -1,0 +1,34 @@
+---
+import { getImage } from "astro:assets";
+
+const { imageUrl, alt = "", width = 1200, height = 630 } = Astro.props;
+
+const imageImports = import.meta.glob("../assets/**/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+});
+
+interface ImageModule {
+  default: ImageMetadata;
+}
+
+const images = Object.entries(imageImports).reduce(
+  (acc, [path, mod]) => {
+    const cleanPath = path.replace("../assets", "").replace(/\/+/g, "/");
+    acc[cleanPath] = (mod as ImageModule).default;
+    return acc;
+  },
+  {} as Record<string, ImageMetadata>
+);
+
+const image = images[imageUrl];
+const optimizedImage = image
+  ? await getImage({ src: image, width, height, format: "webp" })
+  : null;
+---
+
+{optimizedImage && (
+  <>
+    <meta property="og:image" content={`https://ivanmercedes.com${optimizedImage.src}`} />
+    <meta name="twitter:image" content={`https://ivanmercedes.com${optimizedImage.src}`} />
+  </>
+)}

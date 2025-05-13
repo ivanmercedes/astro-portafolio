@@ -1,4 +1,5 @@
 ---
+import OptimizedMetaImage from "@components/OptimizedMetaImage.astro";
 import { SEO } from "astro-seo";
 import { Image } from "astro:assets";
 import { ViewTransitions } from "astro:transitions";
@@ -32,21 +33,17 @@ const { title, description, image } = Astro.props;
         basic: {
           title,
           type: "website",
-          image,
+          image: "",
         },
       }}
       extend={{
-        link: [{ rel: "icon", href: "/favicon.ico" }],
         meta: [
-          {
-            name: "twitter:image",
-            content: `https://ivanmercedes.com/${image}`,
-          },
           { name: "twitter:title", content: title },
           { name: "twitter:description", content: description },
         ],
       }}
     />
+    <OptimizedMetaImage imageUrl={image} alt={title} />
     <ViewTransitions />
   </head>
   <body>
