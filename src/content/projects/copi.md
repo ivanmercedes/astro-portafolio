@@ -23,8 +23,8 @@ El sitio web de COPI fue desarrollado con una plantilla personalizada diseñada 
 
 **Características destacadas:**
 
-🚀 **Optimización de rendimiento:** Carga rápida con recursos comprimidos y lazy loading.
-🏛️ **Diseño institucional:** Imagen sobria, clara y alineada a la identidad de COPI.
-🔍 **SEO técnico:** Código limpio, jerarquía HTML adecuada y etiquetas meta personalizadas.
-📱 **Responsive completo:** Adaptado a móviles, tablets y pantallas grandes.
-🔧 **Gestión sencilla:** Panel de WordPress adaptado para que el cliente pueda administrar el sitio sin conocimientos técnicos..
+- 🚀 **Optimización de rendimiento:** Carga rápida con recursos comprimidos y lazy loading.
+- 🏛️ **Diseño institucional:** Imagen sobria, clara y alineada a la identidad de COPI.
+- 🔍 **SEO técnico:** Código limpio, jerarquía HTML adecuada y etiquetas meta personalizadas.
+- 📱 **Responsive completo:** Adaptado a móviles, tablets y pantallas grandes.
+- 🔧 **Gestión sencilla:** Panel de WordPress adaptado para que el cliente pueda administrar el sitio sin conocimientos técnicos..

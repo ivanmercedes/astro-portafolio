@@ -7,7 +7,7 @@ image:
   url: "/projects/invertix-preview.png"
 tags: ["Wordpress", "BootstrapCSS", "Javascript"]
 category: "Web"
-preview: "https://invertix.com/"
+preview: "https://invertix.com.do/"
 github: ""
 ---
 
