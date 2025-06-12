@@ -17,7 +17,7 @@ export default function App() {
       <NavbarContent className="sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link href="/projects" color="foreground" aria-current="page">
-            Poryectos
+            Proyectos
           </Link>
         </NavbarItem>
         <NavbarItem>
