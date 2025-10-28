@@ -83,7 +83,7 @@ Lo que hare es separar las responsabilidades en tres partes claras:
 - El **Scope** aplica la lógica de filtrado.
 - El **Controlador** solo orquesta.
 
-etnonces lo primero que hice fue crear  **SubmissionFilters** en **app/Models/Scopes**, donde encapsulé toda la lógica de filtros que vienen del frontend
+Lo primero que hice fue crear  **SubmissionFilters** en **app/Models/Scopes**, donde encapsulé toda la lógica de filtros que vienen del frontend
 
 ```php
 class SubmissionFilters
