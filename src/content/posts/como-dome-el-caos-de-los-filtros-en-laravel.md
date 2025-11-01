@@ -7,7 +7,7 @@ image:
 tags: ["Laravel", "Inertia", "Eloquent", "Clean Code", "Backend"]
 ---
 
-Saludos comunidad, estaba yo, tranquilo, haciendo unos cuantos ajustes a mi proyecto cuando me tope con un controlador que ya estaba empezando a parecerse a un monstruo de Frankenstein. si bien no tenía tantas condiciones para filtrar datos qa larga segun se continuara agregando nuevas condiciones de filtro iba a empezar a ser dificil entender qué hacía cada parte del código.
+Saludos comunidad, estaba yo, tranquilo, haciendo unos cuantos ajustes a mi proyecto cuando me tope con un controlador que ya estaba empezando a parecerse a un monstruo de Frankenstein. si bien no tenía tantas condiciones para filtrar datos a larga segun se continuara agregando nuevas condiciones de filtro iba a empezar a ser dificil entender qué hacía cada parte del código.
 
 Entonces decidí tomar cartas en el asunto y buscar una forma más elegante de manejar los filtros en Laravel. Aquí les comparto cómo lo hice.
 
