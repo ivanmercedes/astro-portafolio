@@ -1,6 +1,6 @@
 ---
-name: "Developer Legacy, estancamiento y adaptación: cómo identificar a un desarrollador que dejó de evolucionar 
-datePublished: "2026-01-30"
+name: "Developer Legacy, estancamiento y adaptación: cómo identificar a un desarrollador que dejó de evolucionar"
+datePublished: "01/30/2026"
 postDescription: "Analizamos qué significa realmente ser un developer legacy, la diferencia entre trabajar con tecnología heredada y estar estancado, los perfiles más comunes y cómo mantener la capacidad de adaptación en un ecosistema que cambia constantemente."
 image:
   url: "/posts/developer-legacy.jpg"
@@ -19,7 +19,7 @@ category: "Carrera y Desarrollo"
 slug: "developer-legacy-estancamiento-y-adaptacion"
 seo:
   title: "Developer Legacy y estancamiento: cuándo el problema no es el stack"
-  description: "Descubre qué es realmente un developer legacy, por qué el estancamiento no depende del stack y cómo mantenerte relevante como desarrollador en 2025."
+  description: "Descubre qué es realmente un developer legacy, por qué el estancamiento no depende del stack y cómo mantenerte relevante como desarrollador."
   keywords:
     [
       "developer legacy",
