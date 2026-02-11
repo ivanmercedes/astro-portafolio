@@ -1,5 +1,6 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
+import { Resvg } from '@resvg/resvg-js';
 
 // Helper function to escape HTML
 function escapeHtml(text: string): string {
@@ -77,11 +78,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = async ({ props }) => {
-  const { title } = props as { title: string };
+    const { title } = props as { title: string };
 
-  return new Response(generateSvg(title), {
+  const svg = generateSvg(title);
+
+  const resvg = new Resvg(svg, {
+    fitTo: {
+      mode: 'width',
+      value: 1200
+    }
+  });
+
+  const pngData = resvg.render();
+  const pngBuffer = pngData.asPng();
+
+  return new Response(pngBuffer, {
     headers: {
-      'Content-Type': 'image/svg+xml',
+      'Content-Type': 'image/png',
       'Cache-Control': 'public, max-age=31536000, immutable',
     },
   });

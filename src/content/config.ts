@@ -4,6 +4,7 @@ const collection = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
+    ogTitle: z.string().optional(),
     postDescription: z.string(),
     datePublished: z.string(),
     image: z.object({
