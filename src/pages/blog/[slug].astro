@@ -1,0 +1,132 @@
+---
+import NewLayout from "@layouts/NewLayout.astro";
+import NewNavbar from "@components/new-design/NewNavbar.astro";
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Format date
+const formattedDate = new Date(post.data.datePublished).toLocaleDateString('es-ES', { 
+  year: 'numeric', 
+  month: 'short', 
+  day: 'numeric' 
+});
+
+// Calculate read time (rough estimate: 200 words per minute)
+const wordCount = post.body.split(/\s+/).length;
+const readTime = Math.ceil(wordCount / 200);
+---
+
+<NewLayout
+  title={`${post.data.name} - Ivan Mercedes`}
+  description={post.data.postDescription}
+  type="article"
+>
+  <NewNavbar />
+  <main class="pt-32 pb-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <a href="/blog" class="group inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-white mb-10 transition-colors">
+        <span class="p-1 rounded-md bg-white/5 border border-white/5 group-hover:bg-white/10 transition-colors">
+          <span class="iconify" data-icon="lucide:arrow-left" data-width="14"></span>
+        </span>
+        Volver a escritos
+      </a>
+
+      <article>
+        <div class="mb-10">
+          <div class="flex items-center gap-3 text-xs font-mono text-neutral-500 mb-6">
+            <span>{formattedDate}</span>
+            <span class="w-1 h-1 rounded-full bg-neutral-700"></span>
+            <span>{readTime} min lectura</span>
+          </div>
+          <h1 class="text-3xl md:text-5xl font-medium text-white tracking-tight mb-8 leading-[1.1]">
+            {post.data.name}
+          </h1>
+        </div>
+
+        <!-- Post Content -->
+        <div class="prose text-neutral-400 max-w-none blog-content">
+          <Content />
+        </div>
+
+        <div class="mt-16 pt-10 border-t border-white/5 flex justify-between items-center">
+          <div class="text-sm text-neutral-500">
+            Compartir este artículo
+          </div>
+          <div class="flex gap-4">
+            <button 
+              id="share-twitter"
+              class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors"
+              title="Compartir en Twitter"
+            >
+              <span class="iconify" data-icon="lucide:twitter" data-width="16"></span>
+            </button>
+            <button 
+              id="share-linkedin"
+              class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors"
+              title="Compartir en LinkedIn"
+            >
+              <span class="iconify" data-icon="lucide:linkedin" data-width="16"></span>
+            </button>
+            <button 
+              id="copy-link"
+              class="p-2 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors"
+              title="Copiar enlace"
+            >
+              <span class="iconify" data-icon="lucide:link" data-width="16"></span>
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</NewLayout>
+
+<script>
+  // Get current page URL and title
+  const pageUrl = window.location.href;
+  const pageTitle = document.querySelector('h1')?.textContent || 'Artículo';
+
+  // Twitter share
+  document.getElementById('share-twitter')?.addEventListener('click', () => {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(pageTitle)}&url=${encodeURIComponent(pageUrl)}`;
+    window.open(twitterUrl, '_blank', 'width=550,height=420');
+  });
+
+  // LinkedIn share
+  document.getElementById('share-linkedin')?.addEventListener('click', () => {
+    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`;
+    window.open(linkedinUrl, '_blank', 'width=550,height=420');
+  });
+
+  // Copy link
+  document.getElementById('copy-link')?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+      const button = document.getElementById('copy-link');
+      const icon = button?.querySelector('.iconify');
+      
+      // Visual feedback
+      if (icon) {
+        icon.setAttribute('data-icon', 'lucide:check');
+        button?.classList.add('bg-green-500/20', 'border-green-500/20');
+        
+        setTimeout(() => {
+          icon.setAttribute('data-icon', 'lucide:link');
+          button?.classList.remove('bg-green-500/20', 'border-green-500/20');
+        }, 2000);
+      }
+    } catch (err) {
+      console.error('Error al copiar:', err);
+    }
+  });
+</script>

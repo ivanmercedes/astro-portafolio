@@ -1,47 +1,65 @@
 ---
-import { getCollection } from "astro:content";
+import NewLayout from "@layouts/NewLayout.astro";
+import NewNavbar from "@components/new-design/NewNavbar.astro";
+import { getCollection } from 'astro:content';
 
-import BlogsWidget from "@components/sections/BlogsWidget.astro";
-import Layout from "@layouts/Layout.astro";
-
-const posts = (await getCollection("posts"))
-  .sort(
-    (
-      { data: { datePublished: datePublishedA } },
-      { data: { datePublished: datePublishedB } }
-    ) => new Date(datePublishedB).valueOf() - new Date(datePublishedA).valueOf()
-  )
-  .map(({ data: { datePublished, name, image }, slug }) => ({
-    datePublished,
-    name,
-    image,
-    slug,
+// Get all posts and sort by date (most recent first)
+const allPosts = await getCollection('posts');
+const articles = allPosts
+  .sort((a, b) => {
+    return new Date(b.data.datePublished).getTime() - new Date(a.data.datePublished).getTime();
+  })
+  .map(post => ({
+    title: post.data.name,
+    excerpt: post.data.postDescription,
+    date: new Date(post.data.datePublished).toLocaleDateString('es-ES', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    }),
+    slug: post.slug
   }));
 ---
 
-<Layout
-  type="article"
-  title="Blog de Programación | Conocimientos, Tutoriales, Consejos y Novedades"
-  description="Explora ideas innovadoras, tutoriales, consejos prácticos y lo último en tecnología y desarrollo web. Aprende programación de manera sencilla y efectiva."
-  image="/blog-avatar.webp"
+<NewLayout
+  title="Blog - Ivan Mercedes"
+  description="Artículos sobre desarrollo web, tecnología y productividad."
+  type="website"
 >
-  <main class="py-20 relative z-10">
-    <div class="container mx-auto max-w-screen-lg px-6">
-      <header>
-        <h1
-          class="text-4xl font-bold bg-clip-text text-transparent text-white my-3"
-        >
-          Bienvenido a Mi Blog de Programación
-        </h1>
-        <p>
-          Descubre <strong class="text-primary-500">ideas innovadoras</strong>, <strong
-            class="text-primary-500">consejos prácticos</strong
-          >, <strong class="text-primary-500">tutoriales</strong> y lo último en
-          <em>tecnología y desarrollo web</em>.
-          <br /> ¡Explora y aprende conmigo! 📚
+  <NewNavbar />
+  <main class="pt-32 pb-24 min-h-screen">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-16">
+        <h1 class="text-4xl md:text-5xl font-medium text-white tracking-tight mb-4">Escritos</h1>
+        <p class="text-neutral-400 max-w-2xl">
+          Pensamientos sobre desarrollo web, arquitectura de software y las herramientas que uso diariamente.
         </p>
-      </header>
-      <BlogsWidget data={posts} />
+      </div>
+
+      <div class="flex flex-col">
+        {articles.map((article) => (
+          <article class="group relative py-6 border-b border-white/5 hover:bg-white/[0.02] transition-colors -mx-4 px-4 rounded-lg cursor-pointer">
+            <a href={`/blog/${article.slug}`} class="block">
+              <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2">
+                <div class="flex flex-col gap-1">
+                  <h2 class="text-lg font-medium text-neutral-200 group-hover:text-white transition-colors">
+                    {article.title}
+                  </h2>
+                  <p class="text-sm text-neutral-500 line-clamp-1 max-w-xl">
+                    {article.excerpt}
+                  </p>
+                </div>
+                <div class="flex items-center gap-4 text-xs font-mono text-neutral-500 shrink-0">
+                  <span>{article.date}</span>
+                  <span class="hidden md:inline-block opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 duration-300">
+                    <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
     </div>
   </main>
-</Layout>
+</NewLayout>

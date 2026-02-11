@@ -1,18 +1,28 @@
 ---
-import Hero from "@components/sections/HeroWidget.astro";
-import Layout from "@layouts/Layout.astro";
-import Projects from "@components/sections/Projects.astro";
+import NewLayout from "@layouts/NewLayout.astro";
+import NewNavbar from "@components/new-design/NewNavbar.astro";
+import HeroSection from "@components/new-design/HeroSection.astro";
+import StackSection from "@components/new-design/StackSection.astro";
+import ProjectsSection from "@components/new-design/ProjectsSection.astro";
+import WritingSection from "@components/new-design/WritingSection.astro";
+import OpenSourceSection from "@components/new-design/OpenSourceSection.astro";
+import ExperienceSection from "@components/new-design/ExperienceSection.astro";
+import SimpleFooter from "@components/new-design/SimpleFooter.astro";
 ---
 
-<Layout 
-  type="website"
-  title="Ivan Mercedes - Fullstack Developer Santo Domingo" 
+<NewLayout
+  title="Ivan Mercedes - Desarrollador Fullstack"
   description="Desarrollador Fullstack en Santo Domingo experto en Laravel, React, React Native, Node.js y Wordpress."
-  image="ivanmercedes-avatar.webp"
+  type="website"
 >
+  <NewNavbar />
   <main>
-	<Hero />
-  <Projects />
+    <HeroSection />
+    <StackSection />
+    <!-- <ProjectsSection /> -->
+    <WritingSection />
+    <OpenSourceSection />
+    <!-- <ExperienceSection /> -->
+    <SimpleFooter />
   </main>
-</Layout>
-
+</NewLayout>
