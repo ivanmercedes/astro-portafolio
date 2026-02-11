@@ -14,7 +14,7 @@ export default defineConfig({
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
       // https://shiki.style/themes
-      theme: "tokyo-night",
+      theme: "catppuccin-mocha",
       // Alternatively, provide multiple themes
       // See note below for using dual light/dark themes
       // themes: {
