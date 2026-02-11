@@ -1,25 +1,24 @@
 ---
 // Writing/Blog section
-const articles = [
-  {
-    title: 'El Futuro de React Server Components',
-    excerpt: 'Explorando el cambio en el modelo mental para el desarrollo frontend y cómo impacta el rendimiento.',
-    date: 'Oct 12, 2023',
-    slug: 'react-server-components'
-  },
-  {
-    title: 'Construyendo Sistemas de Diseño Escalables',
-    excerpt: 'Lecciones aprendidas al migrar una base de código CSS monolítica a arquitectura utility-first.',
-    date: 'Sep 28, 2023',
-    slug: 'design-systems'
-  },
-  {
-    title: 'Dominando Flujos de Trabajo en Terminal',
-    excerpt: 'Una guía sobre tmux, Neovim y maximización de la productividad del desarrollador.',
-    date: 'Aug 15, 2023',
-    slug: 'terminal-workflows'
-  },
-];
+import { getCollection } from 'astro:content';
+
+// Get all posts and sort by date (most recent first)
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts.sort((a, b) => {
+  return new Date(b.data.datePublished).getTime() - new Date(a.data.datePublished).getTime();
+});
+
+// Get the 3 most recent posts
+const articles = sortedPosts.slice(0, 3).map(post => ({
+  title: post.data.name,
+  excerpt: post.data.postDescription,
+  date: new Date(post.data.datePublished).toLocaleDateString('es-ES', { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
+  }),
+  slug: post.slug
+}));
 ---
 
 <section id="writing" class="py-24 border-t border-white/5">

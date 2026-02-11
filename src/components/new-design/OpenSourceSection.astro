@@ -1,34 +1,110 @@
 ---
-// Open Source repositories section
-const repos = [
-  {
-    name: 'ui-primitives',
-    description: 'Una colección de componentes UI headless y accesibles construidos con Radix UI y Tailwind CSS.',
-    language: 'TypeScript',
-    languageColor: 'bg-blue-500',
-    stars: '1.2k',
-    forks: '142',
-    url: '#'
-  },
-  {
-    name: 'turbo-cli',
-    description: 'Herramienta CLI de alto rendimiento para scaffolding de aplicaciones web modernas con configuración cero.',
-    language: 'Rust',
-    languageColor: 'bg-orange-500',
-    stars: '843',
-    forks: '64',
-    url: '#'
-  },
-  {
-    name: 'dotfiles',
-    description: 'Mi configuración personal de entorno de desarrollo para Neovim, tmux y zsh.',
-    language: 'Lua',
-    languageColor: 'bg-yellow-400',
-    stars: '256',
-    forks: '42',
-    url: '#'
-  },
-];
+// Open Source repositories section - GitHub API Integration
+const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
+const GITHUB_USERNAME = 'ivanmercedes'; // Tu username de GitHub
+
+// Language colors mapping (GitHub standard colors)
+const languageColors: Record<string, string> = {
+  'TypeScript': 'bg-blue-500',
+  'JavaScript': 'bg-yellow-400',
+  'PHP': 'bg-purple-500',
+  'Rust': 'bg-orange-500',
+  'Lua': 'bg-blue-400',
+  'Python': 'bg-blue-600',
+  'Go': 'bg-cyan-500',
+  'Ruby': 'bg-red-500',
+  'Java': 'bg-orange-600',
+  'C++': 'bg-pink-500',
+  'Shell': 'bg-green-500',
+};
+
+let repos = [];
+
+try {
+  if (GITHUB_TOKEN) {
+    // Fetch pinned repositories using GitHub GraphQL API
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: `
+          query {
+            user(login: "${GITHUB_USERNAME}") {
+              pinnedItems(first: 6, types: REPOSITORY) {
+                nodes {
+                  ... on Repository {
+                    name
+                    description
+                    url
+                    stargazerCount
+                    forkCount
+                    primaryLanguage {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        `
+      })
+    });
+
+    const data = await response.json();
+    
+    if (data.data?.user?.pinnedItems?.nodes) {
+      repos = data.data.user.pinnedItems.nodes.map((repo: {
+        name: string;
+        description: string | null;
+        url: string;
+        stargazerCount: number;
+        forkCount: number;
+        primaryLanguage: { name: string } | null;
+      }) => ({
+        name: repo.name,
+        description: repo.description || 'Sin descripción',
+        language: repo.primaryLanguage?.name || 'Unknown',
+        languageColor: repo.primaryLanguage?.name 
+          ? (languageColors[repo.primaryLanguage.name] || 'bg-gray-500')
+          : 'bg-gray-500',
+        stars: repo.stargazerCount >= 1000 
+          ? `${(repo.stargazerCount / 1000).toFixed(1)}k` 
+          : repo.stargazerCount.toString(),
+        forks: repo.forkCount.toString(),
+        url: repo.url
+      }));
+    }
+  }
+} catch (error) {
+  console.error('Error fetching GitHub repos:', error);
+}
+
+// Fallback data if API fails or token is not set
+if (repos.length === 0) {
+  repos = [
+    {
+      name: 'laravel-route-preview',
+      description: 'Una herramienta para previsualizar rutas de Laravel directamente desde tu editor.',
+      language: 'PHP',
+      languageColor: 'bg-purple-500',
+      stars: '0',
+      forks: '0',
+      url: 'https://github.com/ivanmercedes/laravel-route-preview'
+    },
+    {
+      name: 'Configura tu token de GitHub',
+      description: 'Agrega GITHUB_TOKEN a tu archivo .env para ver tus repositorios pinned automáticamente.',
+      language: 'Config',
+      languageColor: 'bg-gray-500',
+      stars: '0',
+      forks: '0',
+      url: 'https://github.com/ivanmercedes'
+    },
+  ];
+}
 ---
 
 <section id="repos" class="py-16 border-t border-white/5 bg-neutral-900/20">
@@ -41,7 +117,7 @@ const repos = [
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {repos.map((repo) => (
+      {repos.map((repo: { url: string | URL | null | undefined; name: unknown; description: unknown; languageColor: any; language: unknown; stars: unknown; forks: unknown; }) => (
         <a href={repo.url} class="group block p-5 rounded-xl border border-white/5 bg-neutral-900/40 hover:border-white/10 hover:bg-neutral-900/60 transition-all duration-300">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
