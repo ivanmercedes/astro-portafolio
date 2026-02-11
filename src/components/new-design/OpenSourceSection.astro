@@ -111,14 +111,14 @@ if (repos.length === 0) {
   <div class="max-w-6xl mx-auto px-6">
     <div class="flex items-center justify-between mb-10">
       <h2 class="text-2xl font-medium text-white tracking-tight">Open Source</h2>
-      <a href="https://github.com/ivanmercedes" target="_blank" class="text-sm text-neutral-500 hover:text-white transition-colors flex items-center gap-1">
+      <a href="https://github.com/ivanmercedes" target="_blank" rel="noopener noreferrer" class="text-sm text-neutral-500 hover:text-white transition-colors flex items-center gap-1">
         Ver GitHub <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
       </a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {repos.map((repo: { url: string | URL | null | undefined; name: unknown; description: unknown; languageColor: any; language: unknown; stars: unknown; forks: unknown; }) => (
-        <a href={repo.url} class="group block p-5 rounded-xl border border-white/5 bg-neutral-900/40 hover:border-white/10 hover:bg-neutral-900/60 transition-all duration-300">
+        <a href={repo.url} target="_blank" rel="noopener noreferrer" class="group block p-5 rounded-xl border border-white/5 bg-neutral-900/40 hover:border-white/10 hover:bg-neutral-900/60 transition-all duration-300">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-2">
               <span class="iconify text-neutral-400 group-hover:text-white transition-colors" data-icon="lucide:book-marked" data-width="18"></span>
