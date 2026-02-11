@@ -8,16 +8,100 @@
       <span class="w-2 h-2 rounded-full bg-white"></span>
       IVAN MERCEDES
     </a>
+    
+    <!-- Desktop Menu -->
     <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-      <!-- <a href="/#work" class="hover:text-white transition-colors duration-200">Proyectos</a> -->
       <a href="/blog" class="hover:text-white transition-colors duration-200">Blog</a>
-      <!-- <a href="/new#about" class="hover:text-white transition-colors duration-200">Sobre mí</a> -->
-      <!-- <a href="mailto:hello@ivanmercedes.com" class="text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full border border-white/5 transition-all duration-300">
-        Contacto
-      </a> -->
     </div>
-    <button class="md:hidden text-white">
-      <span class="iconify" data-icon="lucide:menu" data-width="24" data-height="24"></span>
+    
+    <!-- Mobile Menu Button -->
+    <button 
+      id="mobile-menu-button" 
+      class="md:hidden text-white hover:text-neutral-300 transition-colors"
+      aria-label="Toggle menu"
+    >
+      <span id="menu-icon" class="iconify" data-icon="lucide:menu" data-width="24" data-height="24"></span>
     </button>
   </div>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div 
+  id="mobile-menu-overlay" 
+  class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300"
+  aria-hidden="true"
+></div>
+
+<!-- Mobile Menu Panel -->
+<div 
+  id="mobile-menu" 
+  class="fixed top-0 right-0 h-full w-64 bg-neutral-950 border-l border-white/10 z-50 transform translate-x-full transition-transform duration-300 ease-out"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="flex flex-col h-full">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-white/5">
+      <span class="text-white font-medium tracking-tighter">MENU</span>
+      <button 
+        id="mobile-menu-close" 
+        class="text-white hover:text-neutral-300 transition-colors"
+        aria-label="Close menu"
+      >
+        <span class="iconify" data-icon="lucide:x" data-width="24" data-height="24"></span>
+      </button>
+    </div>
+    
+    <!-- Menu Items -->
+    <nav class="flex-1 p-6">
+      <div class="flex flex-col gap-6 text-base">
+        <a href="/blog" class="text-neutral-400 hover:text-white transition-colors duration-200">Blog</a>
+        <!-- Uncomment when needed:
+        <a href="/#work" class="text-neutral-400 hover:text-white transition-colors duration-200">Proyectos</a>
+        <a href="/new#about" class="text-neutral-400 hover:text-white transition-colors duration-200">Sobre mí</a>
+        <a href="mailto:hello@ivanmercedes.com" class="text-white bg-white/10 hover:bg-white/20 px-4 py-3 rounded-lg border border-white/5 transition-all duration-300 text-center">
+          Contacto
+        </a>
+        -->
+      </div>
+    </nav>
+  </div>
+</div>
+
+<script>
+  // Mobile menu functionality
+  const menuButton = document.getElementById('mobile-menu-button');
+  const menuClose = document.getElementById('mobile-menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const menuIcon = document.getElementById('menu-icon');
+
+  function openMenu() {
+    mobileMenu?.classList.remove('translate-x-full');
+    overlay?.classList.remove('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    mobileMenu?.classList.add('translate-x-full');
+    overlay?.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = '';
+  }
+
+  menuButton?.addEventListener('click', openMenu);
+  menuClose?.addEventListener('click', closeMenu);
+  overlay?.addEventListener('click', closeMenu);
+
+  // Close menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !mobileMenu?.classList.contains('translate-x-full')) {
+      closeMenu();
+    }
+  });
+
+  // Close menu when clicking on a link
+  const menuLinks = mobileMenu?.querySelectorAll('a');
+  menuLinks?.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>
