@@ -1,0 +1,159 @@
+---
+import { SEO } from "astro-seo";
+import { ViewTransitions } from "astro:transitions";
+
+interface Props {
+  title: string;
+  description: string;
+  type?: string;
+}
+
+const { title, description, type = "website" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <SEO
+      title={title}
+      description={description}
+      openGraph={{
+        basic: {
+          title,
+          type,
+          image: "",
+        },
+      }}
+      extend={{
+        meta: [
+          { name: "twitter:title", content: title },
+          { name: "twitter:description", content: description },
+        ],
+      }}
+    />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    
+    <ViewTransitions />
+    
+    <style is:global>
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0a0a0a;
+      }
+      
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #262626;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #404040;
+      }
+      
+      /* Subtle Grid Background */
+      .bg-grid {
+        background-size: 40px 40px;
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+      }
+      
+      /* Animations */
+      @keyframes fade-in-up {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .delay-100 { animation-delay: 100ms; }
+      .delay-200 { animation-delay: 200ms; }
+      .delay-300 { animation-delay: 300ms; }
+      
+      /* Typography for Blog Content */
+      .prose p { 
+        margin-bottom: 1.5rem; 
+        line-height: 1.75; 
+      }
+      .prose h2 { 
+        margin-top: 3rem; 
+        margin-bottom: 1rem; 
+        font-weight: 500; 
+        color: white; 
+        letter-spacing: -0.02em; 
+        font-size: 1.5rem; 
+      }
+      .prose ul { 
+        margin-bottom: 1.5rem; 
+        list-style-type: disc; 
+        padding-left: 1.5rem; 
+      }
+      .prose li { 
+        margin-bottom: 0.5rem; 
+      }
+      .prose code { 
+        font-family: 'JetBrains Mono', monospace; 
+        background: rgba(255,255,255,0.1); 
+        padding: 0.2em 0.4em; 
+        border-radius: 4px; 
+        font-size: 0.875em; 
+        color: #e5e5e5; 
+      }
+      .prose pre { 
+        background: #171717; 
+        padding: 1.5rem; 
+        border-radius: 0.75rem; 
+        border: 1px solid rgba(255,255,255,0.1); 
+        overflow-x: auto; 
+        margin-bottom: 2rem; 
+      }
+      .prose pre code { 
+        background: transparent; 
+        padding: 0; 
+        color: #d4d4d4; 
+      }
+      .prose blockquote { 
+        border-left: 2px solid #404040; 
+        padding-left: 1.5rem; 
+        font-style: italic; 
+        color: #a3a3a3; 
+        margin-bottom: 1.5rem; 
+      }
+      
+      /* Custom Selection */
+      ::selection {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+    </style>
+  </head>
+  <body class="text-neutral-400 antialiased overflow-x-hidden relative selection:bg-neutral-800 selection:text-white">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,68 @@
+---
+import NewLayout from "@layouts/NewLayout.astro";
+import NewNavbar from "@components/new-design/NewNavbar.astro";
+
+const articles = [
+  {
+    title: 'El Futuro de React Server Components',
+    excerpt: 'Explorando el cambio en el modelo mental para el desarrollo frontend y cómo impacta el rendimiento.',
+    date: 'Oct 12, 2023',
+    slug: 'react-server-components'
+  },
+  {
+    title: 'Construyendo Sistemas de Diseño Escalables',
+    excerpt: 'Lecciones aprendidas al migrar una base de código CSS monolítica a arquitectura utility-first.',
+    date: 'Sep 28, 2023',
+    slug: 'design-systems'
+  },
+  {
+    title: 'Dominando Flujos de Trabajo en Terminal',
+    excerpt: 'Una guía sobre tmux, Neovim y maximización de la productividad del desarrollador.',
+    date: 'Aug 15, 2023',
+    slug: 'terminal-workflows'
+  },
+];
+---
+
+<NewLayout
+  title="Blog - Ivan Mercedes"
+  description="Artículos sobre desarrollo web, tecnología y productividad."
+  type="website"
+>
+  <NewNavbar />
+  <main class="pt-32 pb-24 min-h-screen">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-16">
+        <h1 class="text-4xl md:text-5xl font-medium text-white tracking-tight mb-4">Escritos</h1>
+        <p class="text-neutral-400 max-w-2xl">
+          Pensamientos sobre desarrollo web, arquitectura de software y las herramientas que uso diariamente.
+        </p>
+      </div>
+
+      <div class="flex flex-col">
+        {articles.map((article) => (
+          <article class="group relative py-6 border-b border-white/5 hover:bg-white/[0.02] transition-colors -mx-4 px-4 rounded-lg cursor-pointer">
+            <a href={`/new/blog/${article.slug}`} class="block">
+              <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2">
+                <div class="flex flex-col gap-1">
+                  <h2 class="text-lg font-medium text-neutral-200 group-hover:text-white transition-colors">
+                    {article.title}
+                  </h2>
+                  <p class="text-sm text-neutral-500 line-clamp-1 max-w-xl">
+                    {article.excerpt}
+                  </p>
+                </div>
+                <div class="flex items-center gap-4 text-xs font-mono text-neutral-500 shrink-0">
+                  <span>{article.date}</span>
+                  <span class="hidden md:inline-block opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 duration-300">
+                    <span class="iconify" data-icon="lucide:arrow-right" data-width="16"></span>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</NewLayout>

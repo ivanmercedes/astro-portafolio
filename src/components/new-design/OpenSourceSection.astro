@@ -1,0 +1,74 @@
+---
+// Open Source repositories section
+const repos = [
+  {
+    name: 'ui-primitives',
+    description: 'Una colección de componentes UI headless y accesibles construidos con Radix UI y Tailwind CSS.',
+    language: 'TypeScript',
+    languageColor: 'bg-blue-500',
+    stars: '1.2k',
+    forks: '142',
+    url: '#'
+  },
+  {
+    name: 'turbo-cli',
+    description: 'Herramienta CLI de alto rendimiento para scaffolding de aplicaciones web modernas con configuración cero.',
+    language: 'Rust',
+    languageColor: 'bg-orange-500',
+    stars: '843',
+    forks: '64',
+    url: '#'
+  },
+  {
+    name: 'dotfiles',
+    description: 'Mi configuración personal de entorno de desarrollo para Neovim, tmux y zsh.',
+    language: 'Lua',
+    languageColor: 'bg-yellow-400',
+    stars: '256',
+    forks: '42',
+    url: '#'
+  },
+];
+---
+
+<section id="repos" class="py-16 border-t border-white/5 bg-neutral-900/20">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center justify-between mb-10">
+      <h2 class="text-2xl font-medium text-white tracking-tight">Open Source</h2>
+      <a href="https://github.com/ivanmercedes" target="_blank" class="text-sm text-neutral-500 hover:text-white transition-colors flex items-center gap-1">
+        Ver GitHub <span class="iconify" data-icon="lucide:arrow-right" data-width="14"></span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {repos.map((repo) => (
+        <a href={repo.url} class="group block p-5 rounded-xl border border-white/5 bg-neutral-900/40 hover:border-white/10 hover:bg-neutral-900/60 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <span class="iconify text-neutral-400 group-hover:text-white transition-colors" data-icon="lucide:book-marked" data-width="18"></span>
+              <span class="font-medium text-neutral-200 group-hover:text-white transition-colors">{repo.name}</span>
+            </div>
+            <span class="iconify text-neutral-600 group-hover:text-white transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" data-icon="lucide:arrow-up-right" data-width="16"></span>
+          </div>
+          <p class="text-sm text-neutral-500 mb-6 line-clamp-2">
+            {repo.description}
+          </p>
+          <div class="flex items-center gap-4 text-xs font-mono text-neutral-500">
+            <div class="flex items-center gap-1.5">
+              <span class={`w-2 h-2 rounded-full ${repo.languageColor}`}></span>
+              {repo.language}
+            </div>
+            <div class="flex items-center gap-1">
+              <span class="iconify" data-icon="lucide:star" data-width="12"></span>
+              {repo.stars}
+            </div>
+            <div class="flex items-center gap-1">
+              <span class="iconify" data-icon="lucide:git-fork" data-width="12"></span>
+              {repo.forks}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
