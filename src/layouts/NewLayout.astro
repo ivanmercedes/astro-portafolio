@@ -35,6 +35,7 @@ const fullOgImage = ogImage ? `https://ivanmercedes.com${ogImage}` : "";
         meta: [
           { name: "twitter:title", content: title },
           { name: "twitter:description", content: description },
+           { name: "og:description", content: description },
           ...(fullOgImage ? [{ name: "twitter:image", content: fullOgImage }] : []),
         ],
       }}
