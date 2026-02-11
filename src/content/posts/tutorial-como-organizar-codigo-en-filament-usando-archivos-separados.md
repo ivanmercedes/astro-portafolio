@@ -2,8 +2,6 @@
 name: "Tutorial: Como Organizar Código en Filament 🚀 usando Archivos Separados"
 datePublished: "01/19/2025"
 postDescription: "Aprende a organizar recursos de Filament en Laravel con este tutorial. Descubre cómo separar configuraciones de componentes y mejorar la mantenibilidad de tus paneles de administración, usando un formulario con diseño de pestañas (tabs). ¡Optimiza tus proyectos hoy!"
-image:
-  url: "/posts/tutorial-como-organizar-codigo-en-filament-usando-archivos-separados.jpg"
 tags: ["php", "laravel", "filamentphp", "tutorial"]
 ---
 

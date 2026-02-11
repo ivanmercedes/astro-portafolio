@@ -2,8 +2,6 @@
 name: "La importancia de customizar tu producto aunque uses herramientas como Filament"
 datePublished: "12/18/2025"
 postDescription: "Usar herramientas como Filament acelera el desarrollo, pero la verdadera diferenciación de un producto está en la customización. En este post muestro por qué adaptar la UI y los flujos al dominio del negocio es clave para crear software con identidad propia."
-image:
-  url: "/posts/importancia-customizar-producto-filament.jpg"
 tags:
   - producto
   - saas

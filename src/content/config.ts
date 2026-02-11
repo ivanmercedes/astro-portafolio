@@ -7,9 +7,9 @@ const collection = defineCollection({
     postDescription: z.string(),
     datePublished: z.string(),
     image: z.object({
-      url: z.string(),
+      url: z.string().optional(),
       alt: z.string().optional(),
-    }),
+    }).optional(),
   }),
 })
 

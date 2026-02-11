@@ -2,8 +2,6 @@
 name: "Cómo medir el éxito de tus clientes SaaS y reducir el churn"
 datePublished: "08/31/2025"
 postDescription: "Descubre cómo ir más allá del simple uso para medir el éxito de tus clientes SaaS. Aprende a diseñar métricas efectivas que mejoren la retención y reduzcan el churn."
-image:
-  url: "/posts/como-medir-el-exito-de-tus-clientes-saas-y-reducir-el-churn.jpg"
 tags:
   [
     "SaaS",

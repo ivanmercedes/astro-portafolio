@@ -2,8 +2,6 @@
 name: "Cómo no perder clientes mostrando que tu software hace de todo"
 datePublished: "08/20/2025"
 postDescription: "Muchos productos de software fallan en la venta porque intentan mostrar toda su flexibilidad desde el inicio. Descubre por qué la claridad vende más que la versatilidad y cómo usar la postventa para expandir tu valor."
-image:
-  url: "/posts/vender-simple.jpg"
 tags: ["ventas", "software", "startups", "estrategia"]
 ---
 

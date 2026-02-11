@@ -6,9 +6,11 @@ interface Props {
   title: string;
   description: string;
   type?: string;
+  ogImage?: string;
 }
 
-const { title, description, type = "website" } = Astro.props;
+const { title, description, type = "website", ogImage } = Astro.props;
+const fullOgImage = ogImage ? `https://ivanmercedes.com${ogImage}` : "";
 ---
 
 <!DOCTYPE html>
@@ -26,13 +28,14 @@ const { title, description, type = "website" } = Astro.props;
         basic: {
           title,
           type,
-          image: "",
+          image: fullOgImage,
         },
       }}
       extend={{
         meta: [
           { name: "twitter:title", content: title },
           { name: "twitter:description", content: description },
+          ...(fullOgImage ? [{ name: "twitter:image", content: fullOgImage }] : []),
         ],
       }}
     />

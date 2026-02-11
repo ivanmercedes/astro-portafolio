@@ -2,8 +2,6 @@
 name: "Cómo domé el caos de los filtros en Laravel"
 datePublished: "10/28/2025"
 postDescription: "Una forma simple y profesional de manejar múltiples filtros en Laravel sin llenar tus controladores de condiciones repetidas."
-image:
-  url: "/posts/como-dome-el-caos-de-los-filtros-en-laravel.jpg"
 tags: ["Laravel", "Inertia", "Eloquent", "Clean Code", "Backend"]
 ---
 

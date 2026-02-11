@@ -2,8 +2,7 @@
 name: "Como agregar Variables de Entorno en nuestros proyectos de React Native (Expo)"
 datePublished: "02/06/2022"
 postDescription: "En este post, les mostraré cómo implementar variables de entorno en React Native cuando trabajamos con Expo. Aprenderemos a configurar un archivo .env y a utilizar el paquete react-native-dotenv."
-image:
-  url: "/posts/expo-react.png"
+
 tags: ["expo", "react native"]
 ---
 

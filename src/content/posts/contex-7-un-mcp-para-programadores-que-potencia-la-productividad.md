@@ -2,8 +2,6 @@
 name: "Contex 7: un MCP para programadores que potencia la productividad"
 datePublished: "09/06/2025"
 postDescription: "Descubre cómo optimizar tu flujo de trabajo con Laravel y Filament 4 usando Contex 7, un MCP que permite a los LLMs acceder a documentación actualizada y generar ejemplos precisos."
-image:
-  url: "/posts/contex-7-un-mcp-para-programadores-que-potencia-la-productividad.jpg"
 tags:
   [
     "Laravel",

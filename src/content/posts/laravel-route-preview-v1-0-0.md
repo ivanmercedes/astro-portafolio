@@ -2,8 +2,6 @@
 name: "Laravel Route Preview v1.0.0 - ¡Versión Estable Disponible!"
 datePublished: "12/25/2025"
 postDescription: "Anuncio oficial del lanzamiento de Laravel Route Preview v1.0.0, una extensión para VSCode que permite visualizar, organizar y exportar rutas de Laravel con una interfaz moderna y productiva."
-image:
-  url: "/posts/laravel-route-preview.v1.png"
 tags:
   [
     "laravel",

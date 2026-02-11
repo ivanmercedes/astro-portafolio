@@ -1,9 +1,8 @@
 ---
 name: "Developer Legacy, estancamiento y adaptación: cómo identificar a un desarrollador que dejó de evolucionar"
+ogTitle: "Developer Legacy: estancamiento y adaptación"
 datePublished: "01/30/2026"
 postDescription: "Analizamos qué significa realmente ser un developer legacy, la diferencia entre trabajar con tecnología heredada y estar estancado, los perfiles más comunes y cómo mantener la capacidad de adaptación en un ecosistema que cambia constantemente."
-image:
-  url: "/posts/developer-legacy.jpg"
 tags:
   [
     "desarrollo de software",

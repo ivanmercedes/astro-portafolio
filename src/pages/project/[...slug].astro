@@ -1,5 +1,5 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import NewLayout from "@layouts/NewLayout.astro";
 import type { Props } from "astro";
 import { getCollection } from "astro:content";
 
@@ -29,7 +29,7 @@ const { render, name: title, postDescription, image, tags,  preview,
 const { Content } = await (render as any)();
 ---
 
-<Layout type="article" title={title as string} description={postDescription as string} image={image.url}>
+<NewLayout type="article" title={title as string} description={postDescription as string} image={image.url}>
   <div class="relative py-20 z-10">
     <div class="container mx-auto max-w-screen-lg px-6">
       <article

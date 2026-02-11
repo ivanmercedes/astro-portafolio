@@ -2,8 +2,6 @@
 name: " Laravel Route Preview: Visualiza tus rutas directamente en VS Code"
 datePublished: "06/22/2025"
 postDescription: "Laravel Route Preview es una extensión para Visual Studio Code que permite visualizar de forma rápida y clara todas las rutas definidas en un proyecto Laravel, directamente desde el editor."
-image:
-  url: "/posts/laravel-route-preview.png"
 tags: ["visual studio code", "laravel", "extension"]
 ---
 

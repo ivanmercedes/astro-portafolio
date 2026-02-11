@@ -2,8 +2,6 @@
 name: "Mi aventura Épica para este 2025"
 datePublished: "04/17/2025"
 postDescription: "Es casi la mitad del año 2025 solo faltan unos meses cuando me propuse un reto tan ambicioso como emocionante"
-image:
-  url: "/posts/aventura-epica-ivanmerceces-fullstack-developer-santo-domingo.png"
 tags: ["expo", "react native", "challenge"]
 ---
 
