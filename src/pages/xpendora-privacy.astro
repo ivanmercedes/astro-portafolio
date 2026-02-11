@@ -1,14 +1,15 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import NewNavbar from "@components/new-design/NewNavbar.astro";
+import NewLayout from "@layouts/NewLayout.astro";
 // import Skills from "@components/sections/Skills.astro"; 
 ---
 
-<Layout 
+<NewLayout 
   title="Ivan Mercedes - Fullstack Developer Santo Domingo" 
   description="Desarrollador Fullstack en Santo Domingo experto en Laravel, React, React Native, Node.js y Wordpress."
-  image="ivanmercedes-avatar.webp"
   type="website"
 >
+  <NewNavbar />
     <main class="py-20 relative z-10">
         <div class="container mx-auto max-w-screen-lg px-6">
           <header>
@@ -44,5 +45,5 @@ import Layout from "@layouts/Layout.astro";
           </div>
         </div>
       </main>
-</Layout>
+</NewLayout>
 
