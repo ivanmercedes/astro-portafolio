@@ -72,7 +72,7 @@ function generateSvg(title: string): string {
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection('posts');
   return posts.map(post => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { title: post.data.ogTitle || post.data.name },
   }));
 };
@@ -92,7 +92,7 @@ export const GET: APIRoute = async ({ props }) => {
   const pngData = resvg.render();
   const pngBuffer = pngData.asPng();
 
-  return new Response(pngBuffer, {
+  return new Response(new Uint8Array(pngBuffer), {
     headers: {
       'Content-Type': 'image/png',
       'Cache-Control': 'public, max-age=31536000, immutable',

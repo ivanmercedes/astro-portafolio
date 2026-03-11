@@ -1,35 +1,30 @@
 ---
 import NewLayout from "@layouts/NewLayout.astro";
 import type { Props } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 const { slug } = Astro.params as { slug: string };
 
 export async function getStaticPaths() {
   const posts = await getCollection("projects");
-  return posts.map(({ data: { name, image, postDescription, tags, preview, github}, render, slug }: any) => {
+  return posts.map((post: any) => {
     return {
-      params: { slug },
+      params: { slug: post.id },
       props: {
-        render,
-        name,
-        postDescription,
-        image,
-        tags,
-        preview,
-        github
+        post
       },
     };
   });
 }
 
-const { render, name: title, postDescription, image, tags,  preview,
-  github }: Props & { image: { url: string }, tags: string[], preview?: string, github?: string } = Astro.props as Props & { image: { url: string }, tags: string[], preview?: string, github?: string };
+const { post }: any = Astro.props;
+const { data: { name: title, postDescription, image, tags,  preview,
+  github } } = post;
 
-const { Content } = await (render as any)();
+const { Content } = await render(post);
 ---
 
-<NewLayout type="article" title={title as string} description={postDescription as string} image={image.url}>
+<NewLayout type="article" title={title as string} description={postDescription as string} ogImage={image.url}>
   <div class="relative py-20 z-10">
     <div class="container mx-auto max-w-screen-lg px-6">
       <article
@@ -43,7 +38,7 @@ const { Content } = await (render as any)();
             src={image?.url}
             alt="thumbnail"
             class="w-full object-cover rounded-lg my-2"
-            transition:name=`media-image-${slug.replace("projects/", "")}`
+            transition:name={`media-image-${slug.replace("projects/", "")}`}
           />
           <div class="flex flex-wrap gap-3 justify-center">
             {
@@ -78,4 +73,4 @@ const { Content } = await (render as any)();
       </article>
     </div>
   </div>
-</Layout>
+</NewLayout>
