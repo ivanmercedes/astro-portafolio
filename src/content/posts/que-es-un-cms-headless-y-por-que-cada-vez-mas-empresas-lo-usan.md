@@ -118,13 +118,42 @@ Aqui tienes algunos ejemplos de empresas que utilizan CMS Headless:
 
 ![Empresas que usan CMS headless](../../assets/posts/headless/empresas.png)
 
-En el caso de BHD es un banco de la República Dominicana que utiliza un CMS Headless para gestionar su contenido ellos estan usando Strapi como CMS Headless el cual permite mostrar el contenido en su pagina web y en su aplicacion movil.
+## Banco BHD
+
+El <a href="https://bhd.com.do/" target="_blank" rel="noopener">Banco BHD</a> es uno de los bancos más grandes de la República Dominicana y utiliza un CMS Headless para gestionar su contenido. Ellos estan usando <a href="https://strapi.io/" target="_blank" rel="noopener">Strapi como CMS Headless</a> el cual permite mostrar el contenido en su pagina web y en su aplicacion movil.
 
 Tambien te dejo un articulo con mas informacion sobre el caso de exito de BHD: <a href="https://strapi.io/user-stories/banco-bhd" target="_blank" rel="noopener">Caso de exito de BHD con Strapi </a>
 
 este es un ejemplo solido de como se puede usar un CMS Headless en una empresa grande como lo es el banco BHD.
 
+## Constructora Bisono
 
+Otro ejemplo interesante en República Dominicana es <a href="https://constructorabisono.com.do/" target="_blank" rel="noopener">Constructora Bisonó</a>, una empresa con más de 57 años desarrollando proyectos de vivienda y apartamentos de interés social.
+
+Su plataforma digital utiliza un enfoque Headless, donde <a href="https://es.wordpress.org/" target="_blank" rel="noopener">WordPress</a> funciona como CMS para la gestión del contenido y el frontend está desarrollado en <a href="https://angular.io/" target="_blank" rel="noopener">Angular</a>.
+
+Este tipo de arquitectura les permite separar completamente la administración del contenido de la experiencia visual del sitio, logrando mayor flexibilidad, rendimiento y escalabilidad. Mientras el equipo puede gestionar proyectos, apartamentos y contenido desde WordPress, el frontend en Angular ofrece una experiencia moderna y dinámica para los usuarios.
+
+Este caso demuestra cómo incluso empresas tradicionales del sector construcción están adoptando arquitecturas Headless para modernizar su presencia digital sin abandonar herramientas consolidadas como WordPress.
+
+## BCI (Bella Castle Investment, SRL)
+
+Otro caso moderno es <a href="https://www.bci.com.do/" target="_blank" rel="noopener">BCI</a>, una empresa del sector automovilístico con operaciones en República Dominicana y Jamaica que adoptó una arquitectura Headless utilizando <a href="https://www.sanity.io/" target="_blank" rel="noopener">Sanity</a> como CMS y <a href="https://nextjs.org/" target="_blank" rel="noopener">Next.js</a> para el frontend.
+
+
+Este enfoque les permite manejar todo el contenido desde Sanity — incluyendo productos, servicios, sucursales y contenido corporativo — mientras que Next.js se encarga de entregar una experiencia rápida, moderna y optimizada para SEO.
+
+La separación entre backend de contenido y frontend les facilita:
+
+* Escalar el sitio rápidamente.
+* Publicar contenido desde múltiples sedes.
+* Mejorar el rendimiento y tiempos de carga.
+* Tener una experiencia más flexible y mantenible.
+* Prepararse para integraciones futuras como apps móviles o kioscos digitales.
+
+BCI también destaca por su enfoque en innovación tecnológica dentro del sector automotriz, adaptándose constantemente a los cambios del mercado y expandiendo sus operaciones desde Santo Domingo hacia Santiago, Punta Cana y Jamaica.
+
+Este es otro ejemplo de cómo empresas fuera del sector tecnológico están adoptando arquitecturas Headless modernas para construir plataformas digitales más rápidas, escalables y preparadas para crecimiento futuro.
 
 ## Conclusión
 
