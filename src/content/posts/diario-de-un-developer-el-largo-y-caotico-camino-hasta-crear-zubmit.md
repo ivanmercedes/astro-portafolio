@@ -64,7 +64,7 @@ Me sirvió muchísimo para entender a fondo la psicología de la conversión y c
 
 Y así llegamos a **Zubmit**. 
 
-Zubmit es la evolución final. Tomé la simplicidad de FormSnap y la madurez arquitectónica de rcmail, pero resolví el problema más grande de un BaaS de formularios: **el rendimiento ante picos masivos de tráfico**.
+Zubmit es la evolución final. Tomé la simplicidad de FormSnap y la madurez arquitectónica de su antecesor, pero resolví el problema más grande de un BaaS de formularios: **el rendimiento ante picos masivos de tráfico**.
 
 Así que rediseñé el núcleo:
 
