@@ -22,9 +22,9 @@ Me obsesioné con la interfaz. Programé un diseñador *drag-and-drop* usando la
 
 **El golpe de realidad:** Mantener un editor visual es una pesadilla de estados y CSS. Además, me di cuenta de algo crucial: los desarrolladores *odian* los iframes y los diseños forzados. Ellos quieren escribir su propio HTML y que alguien más se encargue del backend.
 
-## 2. El Monstruo Corporativo: rcmail (Marzo 2024)
+## 2. El Monstruo Corporativo (Marzo 2024)
 
-Decidí que el problema no era el formulario, sino el ecosistema. Hice un cambio de stack radical hacia **PHP y Laravel**, y me fui al extremo opuesto. Así nació **rcmail**, una plataforma BaaS (*Backend-as-a-Service*) pensada para agencias y corporaciones.
+Decidí que el problema no era el formulario, sino el ecosistema. Hice un cambio de stack radical hacia **PHP y Laravel**, y me fui al extremo opuesto. Así nació, una plataforma BaaS (*Backend-as-a-Service*) pensada para agencias y corporaciones.
 
 Aquí mis habilidades de arquitectura dieron un salto enorme:
 
@@ -35,7 +35,7 @@ Aquí mis habilidades de arquitectura dieron un salto enorme:
 
 ![rcmail](../../assets/posts/zubmit-history/rcmail.png)
 
-El golpe de realidad (o, si se prefiere, de ironía corporativa): **rcmail** era técnicamente tan sólido que llegué a proponer su adopción en mi empresa donde trabajo actualmente. La idea gustó. De hecho, gustó tanto que, en lugar de respaldar el proyecto original, decidieron desarrollar una versión propia internamente, impulsarla con todos los recursos disponibles y convertirla en un producto que hoy monetizan con bastante éxito.
+El golpe de realidad (o, si se prefiere, de ironía corporativa): este proyecto era técnicamente tan sólido que llegué a proponer su adopción en mi empresa donde trabajo actualmente. La idea gustó. De hecho, gustó tanto que, en lugar de respaldar el proyecto original, decidieron desarrollar una versión propia internamente, impulsarla con todos los recursos disponibles y convertirla en un producto que hoy monetizan con bastante éxito.
 
 Fue una lección interesante: a veces la mejor validación de una idea no llega en forma de inversión, reconocimiento o apoyo, sino cuando otros deciden construir algo muy parecido después de verla funcionar.
 
