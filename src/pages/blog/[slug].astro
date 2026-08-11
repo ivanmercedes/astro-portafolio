@@ -1,6 +1,8 @@
 ---
 import NewLayout from "@layouts/NewLayout.astro";
 import NewNavbar from "@components/new-design/NewNavbar.astro";
+import ContactSection from "@components/new-design/ContactSection.astro";
+import SimpleFooter from "@components/new-design/SimpleFooter.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -107,6 +109,8 @@ const readTime = Math.ceil(wordCount / 200);
       </article>
     </div>
   </main>
+  <ContactSection />
+  <SimpleFooter />
 </NewLayout>
 
 <script>

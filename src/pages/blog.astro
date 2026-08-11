@@ -3,6 +3,9 @@ import NewLayout from "@layouts/NewLayout.astro";
 import NewNavbar from "@components/new-design/NewNavbar.astro";
 import { getCollection } from 'astro:content';
 
+import ContactSection from "@components/new-design/ContactSection.astro";
+import SimpleFooter from "@components/new-design/SimpleFooter.astro";
+
 // Get all posts and sort by date (most recent first)
 const allPosts = await getCollection('posts');
 const articles = allPosts
@@ -62,4 +65,6 @@ const articles = allPosts
       </div>
     </div>
   </main>
+  <ContactSection />
+  <SimpleFooter />
 </NewLayout>
