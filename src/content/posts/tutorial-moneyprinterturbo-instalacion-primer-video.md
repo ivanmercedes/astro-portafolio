@@ -70,7 +70,7 @@ El script detecta automáticamente el entorno de `uv` y abre tu navegador por de
 
 ## Paso 5: Configurar OpenRouter como proveedor de LLM
 
-MoneyPrinterTurbo soporta OpenRouter como un proveedor **compatible con la API de OpenAI**, así que la configuración se hace apuntando a su endpoint en lugar de usar una opción dedicada. Dentro de la WebUI, ve a la sección de **configuración básica** (Basic Settings) y:
+MoneyPrinterTurbo soporta OpenRouter como un proveedor **compatible con la API de OpenAI**, así que la configuración se hace apuntando a su endpoint en lugar de usar una opción dedicada. Dentro de la WebUI, ve a la sección de **Ajustes** y:
 
 1. Selecciona el proveedor de tipo **OpenAI-compatible / Custom**
 2. En **Base URL**, coloca:
