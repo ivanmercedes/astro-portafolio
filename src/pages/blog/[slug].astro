@@ -3,6 +3,7 @@ import NewLayout from "@layouts/NewLayout.astro";
 import NewNavbar from "@components/new-design/NewNavbar.astro";
 import ContactSection from "@components/new-design/ContactSection.astro";
 import SimpleFooter from "@components/new-design/SimpleFooter.astro";
+import AudioPlayer from "@components/new-design/AudioPlayer.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -64,10 +65,12 @@ const readTime = Math.ceil(wordCount / 200);
             <span>{readTime} min lectura</span>
           </div>
           <h1
-            class="text-3xl md:text-5xl font-medium text-white tracking-tight mb-8 leading-[1.1]"
+            class="text-3xl md:text-5xl font-medium text-white tracking-tight mb-6 leading-[1.1]"
           >
             {blog.data.name}
           </h1>
+          
+          <AudioPlayer slug={blog.id} />
         </div>
 
         <!-- Post Content -->

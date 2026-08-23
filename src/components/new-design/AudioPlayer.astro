@@ -1,0 +1,89 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+const audioPath = `/audio/${slug}.mp3`;
+const fullPath = path.join(process.cwd(), 'public', audioPath);
+
+// Check if the audio file exists during build
+const audioExists = fs.existsSync(fullPath);
+---
+
+{audioExists && (
+  <div class="audio-player-container inline-flex items-center gap-4 mt-6 mb-8 text-sm bg-white/5 border border-white/10 rounded-full py-2 pr-6 pl-2 shadow-lg backdrop-blur-sm">
+    <audio id={`audio-${slug}`} src={audioPath} preload="metadata"></audio>
+    <button 
+      id={`play-btn-${slug}`}
+      class="flex items-center justify-center w-10 h-10 rounded-full bg-white hover:bg-neutral-200 transition-colors text-black shadow-md"
+      aria-label="Escuchar artículo"
+    >
+      <span class="iconify play-icon" data-icon="heroicons-solid:play" data-width="18"></span>
+      <span class="iconify pause-icon hidden" data-icon="heroicons-solid:pause" data-width="18"></span>
+    </button>
+    <div class="flex items-center gap-3 text-neutral-200">
+      <span class="font-medium text-[15px] tracking-wide">Escuchar artículo</span>
+      <span class="w-[1px] h-4 bg-white/20"></span>
+      <span id={`time-${slug}`} class="text-[#e2a85e] font-semibold tracking-wide">--:--</span>
+    </div>
+  </div>
+
+  <script define:vars={{ slug }}>
+    const audio = document.getElementById(`audio-${slug}`);
+    const playBtn = document.getElementById(`play-btn-${slug}`);
+    const timeDisplay = document.getElementById(`time-${slug}`);
+    const playIcon = playBtn.querySelector('.play-icon');
+    const pauseIcon = playBtn.querySelector('.pause-icon');
+
+    // Format time in M:SS
+    const formatTime = (time) => {
+      if (isNaN(time)) return '--:--';
+      const minutes = Math.floor(time / 60);
+      const seconds = Math.floor(time % 60);
+      return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    };
+
+    // Update duration once metadata is loaded
+    audio.addEventListener('loadedmetadata', () => {
+      timeDisplay.textContent = formatTime(audio.duration);
+    });
+
+    // Toggle play/pause
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+      } else {
+        audio.pause();
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+      }
+    });
+
+    // Update time while playing (show remaining time)
+    audio.addEventListener('timeupdate', () => {
+      // In some designs it shows total time statically, but if we want it to count down:
+      // const remaining = audio.duration - audio.currentTime;
+      // Let's just keep the original time display like the image statically, 
+      // or count up. Let's count up for progress.
+      // Actually, standard is to show remaining time or current time.
+      // Let's keep it simple: show current time / total time, or just count down.
+      // We will make it count down.
+      const remaining = Math.max(0, audio.duration - audio.currentTime);
+      timeDisplay.textContent = formatTime(remaining);
+    });
+
+    // Reset when ended
+    audio.addEventListener('ended', () => {
+      playIcon.classList.remove('hidden');
+      pauseIcon.classList.add('hidden');
+      timeDisplay.textContent = formatTime(audio.duration);
+      audio.currentTime = 0;
+    });
+  </script>
+)}
