@@ -2,7 +2,7 @@
 title: "Primero que funcione, después que no me hackeen: del MVP a aislar cada WordPress en Docker"
 name: "Primero que funcione, después que no me hackeen: del MVP a aislar cada WordPress en Docker"
 ogTitle: "Primero que funcione, después que no me hackeen: cómo pasé mi MVP de WordPress con IA a entornos aislados en Docker"
-datePublished: "10/08/2026"
+datePublished: "10/05/2026"
 postDescription: "El MVP de Design2Press tenía que funcionar y punto. Cuando funcionó, me tocó mirar debajo de la alfombra: cualquier usuario podía instalar un plugin y leerse mi .env. Así fue el proceso de pasar de lo simple a lo robusto."
 tags: ["laravel", "wordpress", "docker", "seguridad", "saas", "mvp", "arquitectura"]
 ---
