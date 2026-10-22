@@ -88,7 +88,7 @@ Para cumplirla, cada WordPress pasó a vivir en **su propio contenedor Docker**,
 
 Además, WordPress lleva `DISALLOW_FILE_MODS` y `DISALLOW_FILE_EDIT`. El cliente sigue siendo administrador y gestiona todo su sitio, pero no puede instalar plugins ni tocar código.
 
-Un detalle que me gustó del cambio: ahora **WordPress, los plugins y TailPress vienen dentro de la imagen de Docker**. Crear un entorno ya no descarga nada; solo copia archivos. El MVP descargaba WordPress cada vez, así que de rebote también se volvió más rápido.
+Un detalle que me gustó del cambio: ahora **WordPress, los plugins y la plantilla base vienen dentro de la imagen de Docker**. Crear un entorno ya no descarga nada; solo copia archivos. El MVP descargaba WordPress cada vez, así que de rebote también se volvió más rápido.
 
 Para comprobar que la celda aguantaba, simulé un plugin malicioso dentro del contenedor:
 

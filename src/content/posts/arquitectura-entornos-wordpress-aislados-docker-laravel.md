@@ -33,7 +33,7 @@ Vamos una por una.
 
 ## 1. La imagen de los sitios
 
-Lo primero fue una imagen propia, `design2press/wordpress`, basada en `php:8.5-cli-alpine`. Lleva **todo horneado**: WordPress, el paquete de idioma, SQLite Database Integration, Secure Custom Fields, TailPress con sus dependencias de Composer y WP-CLI.
+Lo primero fue una imagen propia, `design2press/wordpress`, basada en `php:8.5-cli-alpine`. Lleva **todo horneado**: WordPress, el paquete de idioma, SQLite Database Integration, Secure Custom Fields, la plantilla base con sus dependencias de Composer y WP-CLI.
 
 Así los sitios no necesitan internet y las versiones quedan fijadas: para actualizar WordPress se reconstruye la imagen, no se depende de lo que responda wordpress.org en ese momento.
 
