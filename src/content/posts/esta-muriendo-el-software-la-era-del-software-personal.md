@@ -98,5 +98,3 @@ Para mí, el software como lo conocíamos murió o está por morir. Va a quedar 
 Siempre va a haber gente que prefiera pagar. Personas con vidas ya bastante complicadas que no quieren estresarse creando sus propias herramientas, o que usan la IA para hacer fotos de su perrito y mandarlas al grupo de WhatsApp de la familia. Y está perfecto, no lo critico. Esos clientes van a seguir existiendo.
 
 Pero creo que cada vez habrá más gente creando sus propias soluciones y menos gente pagando por las de otros.
-
-Ahora te pregunto a ti: ¿crees que el software está muerto, o esto es solo una transición y todo va a volver a la normalidad? ¿El software todavía tiene valor para ti? Déjame tu opinión en los comentarios.
