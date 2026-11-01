@@ -12,7 +12,9 @@ Lo que sí hubo fue una costumbre. Una manía, casi. Cada vez que algo me molest
 
 Esta es esa historia, en orden, y contada como la viví.
 
-## Empecé por flojo (y no me arrepiento)
+## Empecé por haragán (y no me arrepiento)
+
+Para los que no son dominicanos: haragán es como decimos aquí a alguien vago o perezoso, al que no le gusta hacer el mismo trabajo dos veces. Y sí, así empezó todo.
 
 En abril de 2022 yo estaba haciendo proyectos en React, y cada uno empezaba con el mismo ritual aburrido: instalar ESLint, instalar Prettier, pelearme con las reglas que chocaban entre sí, crear los mismos archivos de configuración de siempre. Era como tener que armar la mesa cada vez que querías comer.
 
