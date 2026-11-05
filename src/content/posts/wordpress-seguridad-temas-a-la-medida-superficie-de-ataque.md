@@ -120,6 +120,26 @@ Pero lo más preocupante no es la cuota, es **qué versión corren los que queda
 
 O sea: **alrededor de 8 de cada 10 sitios Joomla corren una versión que ya no recibe parches de seguridad**. No es que Joomla no publique actualizaciones; es que su base instalada no las aplica. Un sitio que nadie actualiza durante años es una bomba de tiempo, aunque todavía no haya explotado.
 
+### ¿Y WordPress? También hay sitios viejos, pero siguen recibiendo parches
+
+Una vez me dijeron que "ya no quedan WordPress viejos funcionando, pero Joomla viejos sí, y nunca dan problemas". Fui a ver los datos, y la primera parte no es cierta. Según W3Techs (noviembre 2026):
+
+![Versiones de WordPress en uso según W3Techs, noviembre 2026: WordPress 7 68.1%, WordPress 6 25.1%, WordPress 5 4.6%, WordPress 4 2%, WordPress 3 0.2%](../../assets/posts/wordpress-seguridad-superficie-ataque/versiones-wordpress-en-uso.webp)
+
+- **WordPress 7.x: 68,1 %** y **6.x: 25,1 %**.
+- **5.x: 4,6 %**, **4.x: 2 %** y hasta **3.x: 0,2 %**.
+
+Un 2,2 % parece poco, pero WordPress está en el 39,5 % de todos los sitios web. Haz la cuenta: los WordPress 3.x y 4.x que siguen en línea son alrededor del **0,9 % de toda la web**, casi lo mismo que **todos los sitios Joomla juntos** (1,1 %). Sitios viejos de WordPress hay, y muchos.
+
+La diferencia está en otra parte: **WordPress sigue parcheando sus versiones viejas**. Según el historial de versiones de WordPress.org, en octubre de 2026 todavía salieron releases de seguridad para ramas como 4.7, 4.8 y 4.9, de 2016 y 2017. Solo dejaron de recibir parches las ramas 3.7 a 4.0 (en noviembre de 2022) y 4.1 a 4.6 (en julio de 2025). Y como WordPress instala solo las actualizaciones menores de seguridad, un WordPress 5.x que nadie toca desde hace años **sigue recibiendo parches del core sin que nadie haga nada**.
+
+Un Joomla 3 no tiene eso: desde agosto de 2023 no le llega ningún parche, ni automático ni manual. Así que la comparación justa es esta:
+
+- **WordPress viejo**: el core sigue protegido; el riesgo está en los plugins que nadie actualizó.
+- **Joomla 3 viejo**: el core está congelado en el tiempo, con todos los fallos que se descubran a partir de ahora sin parche.
+
+Y sobre lo de "nunca dan problemas": recuerda que, según Sucuri, el **90 % de los Joomla infectados ya estaban desactualizados**. Que nadie lo haya atacado todavía no significa que no se pueda atacar. Volvemos a lo mismo: menos cuota, menos bots buscándolo. Eso es suerte, no seguridad.
+
 ## Entonces, ¿por qué un Joomla con admin/admin sobrevive meses?
 
 Esta es la parte que me intrigaba. He visto entornos de desarrollo con Joomla expuestos a internet con `admin` / `admin`, olvidados durante meses, a veces años, y **nadie entraba**. Monta un WordPress con `admin` / `admin` en un servidor público y probablemente no dure ni una semana.
@@ -355,6 +375,9 @@ No necesitas el CMS menos popular para estar seguro. Necesitas que tu sitio, ent
 - SecurityWeek — [SEO spam dominated website infections in 2019](https://www.securityweek.com/seo-spam-dominated-website-infections-2019-report) (informe Sucuri 2019: sitios desactualizados al infectarse).
 - The Hacker News — [Over 1 Million WordPress Sites Infected by Balada Injector](https://thehackernews.com/2023/04/over-1-million-wordpress-sites-infected.html).
 - W3Techs — [Usage statistics of Joomla](https://w3techs.com/technologies/details/cm-joomla) (versiones en uso).
+- W3Techs — [Usage statistics of WordPress](https://w3techs.com/technologies/details/cm-wordpress) (versiones en uso, noviembre 2026).
+- WordPress.org — [WordPress versions](https://wordpress.org/documentation/article/wordpress-versions/) y [versiones 0.7 a 4.9](https://wordpress.org/documentation/article/wordpress-versions-0-7-to-4-9/) (releases de seguridad por rama).
+- WordPress.org — [Dropping security updates for WordPress versions 4.1 through 4.6](https://wordpress.org/news/2025/06/dropping-security-updates-for-wordpress-versions-4-1-through-4-6/) y Make WordPress Core — [Final releases of WordPress 3.7–4.0](https://make.wordpress.org/core/2022/11/23/final-releases-of-wordpress-3-7-4-0/).
 - GeekChamp — [CMS Market Share 2026](https://geekchamp.com/cms-market-share-2026-latest-usage-statistics-and-trends/) y Colorlib — [CMS Market Share 2026](https://colorlib.com/wp/cms-market-share/) (cuotas basadas en W3Techs).
 - endoflife.ai — [Joomla 5 EOL](https://endoflife.ai/article-joomla-5-eol) y mysites.guru — [Joomla 3 End of Life](https://mysites.guru/tools/joomla-configuration/joomla-3-end-of-life/) (ciclo de vida de Joomla).
 - cvefeed.io — [CVE-2023-23752](https://cvefeed.io/vuln/detail/CVE-2023-23752) (incluida en el catálogo KEV de CISA).
