@@ -1,0 +1,69 @@
+---
+// Personal projects section - products I build and run
+const projects = [
+  {
+    name: 'Design2Press',
+    description: 'Convierte las capturas de tu diseño en un sitio WordPress editable con Tailwind CSS, listo para exportar con tu dominio.',
+    url: 'https://design2press.com/',
+    image: '/projects/design2press-preview.png',
+  },
+  {
+    name: 'ReporteFacil',
+    description: 'Facturación electrónica e-CF y reportes 606 para la DGII, pensado para contables y empresas en República Dominicana.',
+    url: 'https://reportefacil.com/',
+    image: '/projects/reportefacil-preview.png',
+  },
+  {
+    name: 'Zubmit',
+    description: 'Formularios headless sin backend: recibe envíos en minutos e intégralos con tus herramientas favoritas.',
+    url: 'https://zubmit.net/',
+    image: '/projects/zubmit-preview.png',
+  },
+  {
+    name: 'Flexa',
+    description: 'Edita el texto, las imágenes y los precios de tu sitio hecho con IA desde un editor simple, sin código ni nuevos prompts.',
+    url: 'https://flexacms.com/',
+    image: '/projects/flexa-preview.png',
+  },
+  {
+    name: 'Domistate',
+    description: 'CRM inmobiliario hecho en RD: catálogo, clientes y WhatsApp en un solo lugar para agentes e inmobiliarias.',
+    url: 'https://domistate.com/',
+    image: '/projects/domistate-preview.png',
+  },
+];
+---
+
+<section id="proyectos" class="py-16 border-t border-white/5">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex items-center justify-between mb-10">
+      <h2 class="text-2xl font-medium text-white tracking-tight">Proyectos personales</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {projects.map((project) => (
+        <a href={project.url} target="_blank" rel="noopener noreferrer" class="group block overflow-hidden rounded-xl border border-white/5 bg-neutral-900/40 hover:border-white/10 hover:bg-neutral-900/60 transition-all duration-300">
+          <div class="aspect-[16/10] overflow-hidden border-b border-white/5">
+            <img src={project.image} alt={`Vista previa de ${project.name}`} width="1440" height="900" loading="lazy" decoding="async" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]" />
+          </div>
+          <div class="p-5">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <span class="iconify text-neutral-400 group-hover:text-white transition-colors" data-icon="lucide:rocket" data-width="18"></span>
+              <span class="font-medium text-neutral-200 group-hover:text-white transition-colors">{project.name}</span>
+            </div>
+            <span class="iconify text-neutral-600 group-hover:text-white transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1" data-icon="lucide:arrow-up-right" data-width="16"></span>
+          </div>
+          <p class="text-sm text-neutral-500 mb-6 line-clamp-2">
+            {project.description}
+          </p>
+          <div class="flex items-center gap-1.5 text-xs font-mono text-neutral-500">
+            <span class="iconify" data-icon="lucide:globe" data-width="12"></span>
+            {new URL(project.url).hostname}
+          </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
