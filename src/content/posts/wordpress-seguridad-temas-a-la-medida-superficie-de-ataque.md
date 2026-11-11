@@ -10,7 +10,7 @@ Cada cierto tiempo alguien me dice "WordPress es inseguro". Y cada vez respondo 
 
 En este post quiero sostener esa frase con datos, no con opinión. Vamos a ver de dónde salen realmente las vulnerabilidades, por qué los atacantes eligen WordPress y no Joomla, qué tiene que ver la cuota de mercado con todo esto, y por qué mi regla para proyectos de clientes es **tema a la medida y máximo dos plugins**.
 
-Y de paso vamos a hablar de algo que he visto más de una vez y que parece contradecir todo: **un Joomla de desarrollo con usuario `admin` y contraseña `admin` que pasa meses, a veces años, sin que nadie lo ataque**. Spoiler: no es que Joomla sea más seguro. Es economía.
+Y de paso vamos a hablar de algo que he visto más de una vez y que parece contradecir todo: **un Joomla de desarrollo con usuario `admin` y contraseña `admin` que pasa meses, a veces años, sin que nadie lo ataque**. Spoiler: no es que Joomla sea más seguro. Es economía. Y para comprobarlo, expuse un WordPress y un Joomla recién instalados durante 6 días: **el WordPress recibió 10.329 intentos de login y el Joomla, ninguno**.
 
 ## Primero, los datos: ¿dónde nacen las vulnerabilidades?
 
@@ -182,6 +182,55 @@ Así que la lección de Joomla no es "usa algo con poca cuota y estarás a salvo
 > **Los atacantes van donde el retorno es mayor. Tu trabajo es que tu sitio no dé retorno.**
 
 Y ahí es donde entra la estrategia de reducir la superficie de ataque.
+
+## Lo comprobé: un WordPress y un Joomla expuestos durante 6 días
+
+Todo lo anterior son informes de terceros y un razonamiento económico. Quería verlo con mis propios logs, así que monté un experimento.
+
+> **El lab sigue activo hasta el 30 de noviembre de 2026.** Los datos de esta sección corresponden a los primeros 6 días (del 5 al 11 de noviembre). Cuando termine, actualizaré las métricas y las gráficas con el mes completo.
+
+### Cómo lo monté
+
+- **Dos instalaciones limpias**: WordPress 7.1 y Joomla 6.2, sin plugins ni extensiones (a WordPress le borré incluso Akismet y Hello Dolly). Solo el core.
+- **Contraseñas fuertes** de 32 caracteres aleatorios. No quería medir cuánto tardan en hackearlos, sino **cuánto tardan en intentarlo**.
+- **Igualdad de condiciones**: el mismo servidor, la misma IP, el mismo proxy, dos subdominios nuevos (`wp.ivanmercedes.com` y `joomla.ivanmercedes.com`) publicados en el mismo minuto.
+- **Registro de todo**: un Caddy delante de cada CMS guardaba en JSON cada petición, con la IP real, la URL y el User-Agent. Después, un script clasificaba cada petición: búsqueda de secretos, exploit, enumeración de usuarios, intento de login…
+- **Sin enlaces durante los primeros 17 minutos.** La única pista de que los sitios existían era el certificado HTTPS, que se publica automáticamente en los registros públicos de [Certificate Transparency](https://certificate.transparency.dev/). Después los publiqué en un [gist](https://gist.github.com/ivanmercedes/14806b449e5c75b53c3e469b7f25516f), urlscan.io, VirusTotal y el Wayback Machine, para ver si cambiaba algo.
+
+### Los resultados
+
+| Del 5 al 11 de noviembre de 2026 | WordPress | Joomla |
+|---|---|---|
+| Peticiones totales | 15.011 | 2.313 |
+| IPs distintas | 171 | **191** |
+| Eventos de ataque | 13.236 | 845 |
+| Ataques por hora (tras publicar los enlaces) | **95** | **5,9** |
+| Intentos de login | **10.329** | **0** |
+| Visitas al panel de admin | 403 POST a `wp-login.php` | 1 GET a `/administrator/` |
+| Logins exitosos | 0 | 0 |
+
+![Ataques acumulados en 6 días: WordPress 13.236 y Joomla 845. Una sola IP lanzó 9.426 intentos de login contra xmlrpc.php en 35 minutos](../../assets/posts/wordpress-seguridad-superficie-ataque/lab-ataques-acumulados.webp)
+
+Lo que más me llamó la atención:
+
+**1. Los bots llegaron en menos de un minuto, a los dos por igual.** Antes de que existiera ningún enlace, los dos sitios ya estaban recibiendo peticiones a `/backup.sql`, `/.svn/wc.db`, `/.env` y `/actuator/heapdump`. Este último ni siquiera es de un CMS: es de Spring Boot, en Java. Estos bots vigilan los registros de Certificate Transparency y lanzan una lista genérica contra cualquier dominio nuevo, sin importar qué haya detrás. En esos primeros minutos, Joomla recibió incluso un poco más de tráfico que WordPress.
+
+**2. Joomla recibió más visitantes distintos, pero nadie intentó entrar.** Este es el dato clave del experimento: 191 IPs distintas pasaron por el Joomla, más que por el WordPress. Los bots **sí lo encontraron**. Pero en casi 6 días, nadie mandó ni un solo intento de login a `/administrator/`. Solo hubo una visita al panel, y no volvió. Eso es exactamente el ROI del atacante: no merece la pena programar una fuerza bruta para un 1,6 % del mercado.
+
+**3. A WordPress le intentaron entrar en menos de un día.** Los primeros usuarios los enumeraron a las 3,7 horas (`/?author=1`), y el primer intento de login llegó a las 20,5 horas. El día 4, una sola IP de Google Cloud lanzó **9.426 intentos de contraseña contra `xmlrpc.php` en 35 minutos**. Ninguno funcionó: con una contraseña de 32 caracteres, la fuerza bruta no tiene ninguna posibilidad.
+
+**4. Los bots dan WordPress por hecho.** El Joomla recibió **46 sondas de WordPress** (`/wp-json/`, `/wp-admin/`…) e incluso 2 intentos de login contra un `xmlrpc.php` que no existe, y una enumeración de usuarios de WordPress. El WordPress recibió **1** petición que podría ser de Joomla. Muchos bots ni comprueban qué CMS tienen delante: prueban WordPress porque estadísticamente es lo que hay.
+
+![Tiempo hasta cada tipo de ataque: los dos reciben bots y exploits genéricos en menos de un minuto; WordPress recibe enumeración de usuarios a las 3,7 horas, el primer login a las 20,5 horas y fuerza bruta masiva el día 4,6; Joomla nunca](../../assets/posts/wordpress-seguridad-superficie-ataque/lab-hitos.webp)
+
+**¿Y si el resultado depende de un solo atacante?** Lo comprobé. Quitando la IP más activa de cada sitio (la de la fuerza bruta en WordPress, y una que hizo 662 peticiones con `curl` en Joomla), WordPress sigue recibiendo **28 ataques por hora frente a 3,7**: unas 7,6 veces más. Y los 903 intentos de login restantes siguen siendo todos para WordPress.
+
+### Las limitaciones, para ser honesto
+
+- **Es un solo par de sitios, y por ahora solo 6 días.** Es un experimento ilustrativo, no una estadística de internet. Con los datos del mes completo veremos si Joomla sigue sin recibir intentos de login.
+- **Los subdominios revelan el CMS.** `wp.` y `joomla.` pueden ayudar a un bot a elegir qué probar. Con nombres neutros, el WordPress probablemente habría tardado algo más en recibir su primer login.
+- **La IP del servidor ya alojaba otros proyectos**, así que no partía de cero. Pero eso afecta igual a los dos.
+- **No probé `admin` / `admin`**, a propósito: no iba a dejar un sitio fácil de comprometer en mi servidor. Lo que sí demuestra el experimento es que, en 6 días, **nadie intentó ninguna contraseña en Joomla**, ni débil ni fuerte. Con esa presión, la anécdota del Joomla olvidado que dura meses deja de parecer suerte.
 
 ## Superficie de ataque: cada plugin es un proveedor de seguridad
 
@@ -359,7 +408,7 @@ Un tema a la medida cuesta más al inicio. Pero ese coste se paga una vez; el de
 1. **El core de cualquier CMS serio es sólido**: WordPress, Joomla y Drupal tienen entre 6 y 15 fallos de core al año. En WordPress fueron 6 en 2025, frente a más de 11.000 en el ecosistema.
 2. **El riesgo está en los plugins y temas de terceros**, y los atacantes los explotan en cuestión de horas.
 3. **La cuota de mercado define a quién se ataca**: WordPress recibe más ataques porque da más retorno, no porque sea peor.
-4. **Joomla no es más seguro, es menos rentable de atacar.** Y con cerca de 8 de cada 10 instalaciones en versiones sin soporte, el día que aparece un exploit sin autenticación como CVE-2023-23752, esa "tranquilidad" se termina.
+4. **Joomla no es más seguro, es menos rentable de atacar.** En mi experimento, los bots encontraron los dos sitios en menos de un minuto, pero en 6 días solo intentaron entrar al WordPress: 10.329 intentos contra 0. Y con cerca de 8 de cada 10 instalaciones en versiones sin soporte, el día que aparece un exploit sin autenticación como CVE-2023-23752, esa "tranquilidad" se termina.
 5. **Reducir la superficie de ataque es la medida con mejor relación esfuerzo/beneficio**: tema a la medida, máximo dos plugins bien elegidos, archivos bloqueados en el admin y verificación de integridad.
 
 No necesitas el CMS menos popular para estar seguro. Necesitas que tu sitio, entre los millones que un bot va a escanear hoy, no tenga nada que valga la pena.
@@ -381,4 +430,5 @@ No necesitas el CMS menos popular para estar seguro. Necesitas que tu sitio, ent
 - GeekChamp — [CMS Market Share 2026](https://geekchamp.com/cms-market-share-2026-latest-usage-statistics-and-trends/) y Colorlib — [CMS Market Share 2026](https://colorlib.com/wp/cms-market-share/) (cuotas basadas en W3Techs).
 - endoflife.ai — [Joomla 5 EOL](https://endoflife.ai/article-joomla-5-eol) y mysites.guru — [Joomla 3 End of Life](https://mysites.guru/tools/joomla-configuration/joomla-3-end-of-life/) (ciclo de vida de Joomla).
 - cvefeed.io — [CVE-2023-23752](https://cvefeed.io/vuln/detail/CVE-2023-23752) (incluida en el catálogo KEV de CISA).
+- Experimento propio — WordPress 7.1 y Joomla 6.2 expuestos del 5 al 11 de noviembre de 2026, con logs de Caddy clasificados por tipo de petición ([referencia pública del experimento](https://gist.github.com/ivanmercedes/14806b449e5c75b53c3e469b7f25516f)).
 - Wordfence — [2021 Mid-Year WordPress Security Report](https://wordfence.com/wp-content/uploads/2021/08/2021-Mid-Year-WordPress-Security-Report-Wordfence-WPScan.pdf) e informe de amenazas 2020 (ataques de contraseña bloqueados).
