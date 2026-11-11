@@ -1,6 +1,6 @@
 ---
 name: "WordPress no es inseguro, tus 20 plugins sí"
-ogTitle: "WordPress y seguridad: reduce la superficie de ataque con temas a la medida y máximo 2 plugins"
+ogTitle: "WordPress no es inseguro, tus 20 plugins sí"
 datePublished: "11/05/2026"
 postDescription: "Un análisis técnico, con datos de Patchstack, Sucuri, W3Techs y CISA, de por qué WordPress se hackea tanto, por qué el problema casi nunca es el core, cómo un tema a la medida con máximo dos plugins reduce la superficie de ataque, y por qué un Joomla con admin/admin puede pasar meses sin que nadie lo toque."
 tags: ["wordpress", "seguridad", "joomla", "cms", "plugins", "superficie de ataque", "desarrollo a la medida"]
